@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'abstract_messanger.dart';
 import 'fhir_event_processor/abstract_action_executor.dart';
 import 'fhir_event_processor/abstract_fhir_event_processor.dart';
 import 'fhir_event_processor/azure_event_processor.dart';
@@ -6,12 +7,12 @@ import 'fhir_message_client/abstract_fhir_message_client.dart';
 import 'fhir_message_client/azure_message_client.dart';
 import 'validators/abstract_event_validator.dart';
 
-class Messanger {
+class Messanger implements MessangerAbstract {
   final FhirEventProcessorAbstract _eventProcessor;
 
   Messanger(this._eventProcessor);
 
-  factory Messanger.withAzure({
+  factory Messanger.setupWithAzure({
     required String connectionString,
     required queueName,
     required List<EventValidatorAbstract> eventValidators,
@@ -35,6 +36,7 @@ class Messanger {
     return Messanger(eventProcessor);
   }
 
+  @override
   Future<void> listen({required Function(Object e) processExceptionHandler, Duration? sleepDuration}) async {
     final finalSleepDuration = sleepDuration ?? Duration(seconds: 20);
 
