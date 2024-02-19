@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:azstore/azstore.dart';
 import 'fhir_event.dart';
 
+// TODO: Think if we need to add here abstract/interface
 class FhirMessage {
   final String id;
   final String insertationTime;
@@ -28,6 +31,26 @@ class FhirMessage {
       expirationTime: message.expirationTime ?? "",
       dequeueCount: int.parse(message.dequeueCount ?? ""),
       body: fhirEvent,
+    );
+  }
+
+  String bodyToJson() {
+    return jsonEncode(body.toJson());
+  }
+
+  copyWith({
+    String? expirationTime,
+    String? insertationTime,
+    int? dequeueCount,
+    FhirEvent? body,
+  }) {
+    return FhirMessage(
+      id: id,
+      insertationTime: expirationTime ?? this.expirationTime,
+      expirationTime: insertationTime ?? this.insertationTime,
+      dequeueCount: dequeueCount ?? this.dequeueCount,
+      popReceipt: popReceipt,
+      body: body ?? this.body,
     );
   }
 }

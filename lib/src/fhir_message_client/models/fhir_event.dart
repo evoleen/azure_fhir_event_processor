@@ -37,4 +37,17 @@ class FhirEvent {
       body: fhirEventBody,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'topic': topic,
+      'subject': subject,
+      'eventType': eventType,
+      'dataVersion': dataVersion,
+      'metadataVersion': metadataVersion,
+      'eventTime': eventTime,
+      'body': body.toJson()
+    };
+  }
 }

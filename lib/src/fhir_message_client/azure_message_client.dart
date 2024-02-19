@@ -66,6 +66,12 @@ class AzureMessageClient implements FhirMessageClientAbstract {
     return fhirMessage;
   }
 
+  String _serializeToForMessageText(FhirMessage fhirMessage) {
+    Codec<String, String> decoder = utf8.fuse(base64);
+
+    return decoder.encode(fhirMessage.bodyToJson());
+  }
+
   String _base64TxtDecode(txt) {
     Codec<String, String> decoder = utf8.fuse(base64);
 

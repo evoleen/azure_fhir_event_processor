@@ -19,4 +19,13 @@ class FhirEventBody {
       resourceVersionId: jsonObj['resourceVersionId'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'resourceFhirId': resourceFhirId,
+      'resourceType': resourceType,
+      'resourceFhirAccount': resourceFhirAccount,
+      'resourceVersionId': resourceVersionId
+    };
+  }
 }
