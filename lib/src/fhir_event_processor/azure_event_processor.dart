@@ -1,3 +1,5 @@
+import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_post_processor.dart';
+
 import '../errors.dart';
 import '../fhir_message_client/abstract_fhir_message_client.dart';
 import '../fhir_message_client/models/fhir_message.dart';
@@ -9,13 +11,14 @@ class AzureEventProcessor implements FhirEventProcessorAbstract {
   late FhirMessageClientAbstract _messageClient;
   final List<EventValidatorAbstract> _validators = [];
   final List<ActionExecutorAbstract> _actionExecutors = [];
+  final List<PostProcessorAbstract> _postProcessors = [];
 
   AzureEventProcessor({required messageClient}) {
     _messageClient = messageClient;
   }
 
   @override
-  Future<void> processOne() async {
+  Future<void> processOne({required}) async {
     if (_actionExecutors.isEmpty) {
       throw Exception('No action executors are provided');
     }
@@ -24,10 +27,10 @@ class AzureEventProcessor implements FhirEventProcessorAbstract {
     if (fhirMessages.isEmpty) return;
 
     FhirMessage fhirMessage = fhirMessages.first;
+
     await _validate(fhirMessage);
     await _executeActions(fhirMessage);
-
-    // await _messageClient.removeMessage(fhirMessage: fhirMessage);
+    await _postProcessing(fhirMessage);
   }
 
   @override
@@ -45,6 +48,11 @@ class AzureEventProcessor implements FhirEventProcessorAbstract {
   @override
   void addValidator(EventValidatorAbstract eventValidator) {
     _validators.add(eventValidator);
+  }
+
+  @override
+  void addPostProcessor(PostProcessorAbstract postProcessor) {
+    _postProcessors.add(postProcessor);
   }
 
   Future<void> _validate(FhirMessage fhirMessage) async {
@@ -69,6 +77,12 @@ class AzureEventProcessor implements FhirEventProcessorAbstract {
       if (executor.type.name == fhirMessage.body.eventType) {
         await executor.execute(fhirEvent: fhirMessage.body);
       }
+    }
+  }
+
+  Future<void> _postProcessing(FhirMessage fhirMessage) async {
+    for (final postProcessor in _postProcessors) {
+      await postProcessor.apply(fhirMessage: fhirMessage, messageClient: _messageClient);
     }
   }
 }
