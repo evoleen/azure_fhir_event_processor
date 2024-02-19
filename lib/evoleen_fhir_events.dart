@@ -12,6 +12,8 @@ export 'src/fhir_event_processor/abstract_fhir_event_processor.dart';
 export 'src/fhir_event_processor/azure_event_processor.dart';
 export 'src/validators/abstract_event_validator.dart';
 export 'src/fhir_event_processor/abstract_action_executor.dart';
+export 'src/fhir_event_processor/abstract_post_processor.dart';
+export 'src/post_processors/remove_msg_post_processor.dart';
 export 'src/abstract_messanger.dart';
 export 'src/messanger.dart';
 export 'src/errors.dart';

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'abstract_messanger.dart';
 import 'fhir_event_processor/abstract_action_executor.dart';
 import 'fhir_event_processor/abstract_fhir_event_processor.dart';
+import 'fhir_event_processor/abstract_post_processor.dart';
 import 'fhir_event_processor/azure_event_processor.dart';
 import 'fhir_message_client/abstract_fhir_message_client.dart';
 import 'fhir_message_client/azure_message_client.dart';
@@ -17,6 +18,7 @@ class Messanger implements MessangerAbstract {
     required queueName,
     required List<EventValidatorAbstract> eventValidators,
     required List<ActionExecutorAbstract> actionExecutors,
+    List<PostProcessorAbstract>? postProcessors,
     int? msgVisibilityTimeout,
   }) {
     FhirMessageClientAbstract messageClient = AzureMessageClient(
@@ -31,6 +33,9 @@ class Messanger implements MessangerAbstract {
     }
     for (final executor in actionExecutors) {
       eventProcessor.addActionExecutor(executor);
+    }
+    for (final postProcessor in (postProcessors ?? [])) {
+      eventProcessor.addPostProcessor(postProcessor);
     }
 
     return Messanger(eventProcessor);
