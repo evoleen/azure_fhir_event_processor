@@ -13,11 +13,12 @@ class AzureMessageClient implements FhirMessageClientAbstract {
     required connectionString,
     required String queueName,
     int? msgVisibilityTimeout,
+    AzureStorage? azureStorage,
   }) {
     _connectionString = connectionString;
     _queueName = queueName;
     _msgVisibilityTimeout = msgVisibilityTimeout ?? 30;
-    _storage = AzureStorage.parse(_connectionString);
+    _storage = azureStorage ?? AzureStorage.parse(_connectionString);
   }
 
   @override
