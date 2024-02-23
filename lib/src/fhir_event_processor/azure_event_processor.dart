@@ -19,13 +19,8 @@ class AzureEventProcessor implements FhirEventProcessorAbstract {
 
   @override
   Future<void> processOne({required}) async {
-    if (_actionExecutors.isEmpty) {
-      throw Exception('No action executors are provided');
-    }
-
     List<FhirMessage> fhirMessages = await _messageClient.consumeMessages(messagesCount: 1);
     if (fhirMessages.isEmpty) return;
-
     FhirMessage fhirMessage = fhirMessages.first;
 
     await _validate(fhirMessage);
@@ -74,8 +69,8 @@ class AzureEventProcessor implements FhirEventProcessorAbstract {
 
   Future<void> _executeActions(FhirMessage fhirMessage) async {
     for (final executor in _actionExecutors) {
-      if (executor.type.name == fhirMessage.body.eventType) {
-        await executor.execute(fhirEvent: fhirMessage.body);
+      if (executor.type.name == fhirMessage.fhirEvent.eventType) {
+        await executor.execute(fhirEvent: fhirMessage.fhirEvent);
       }
     }
   }

@@ -10,7 +10,7 @@ class FhirMessage {
   final String expirationTime;
   final int dequeueCount;
   final String popReceipt;
-  final FhirEvent body;
+  final FhirEvent fhirEvent;
 
   FhirMessage({
     required this.id,
@@ -18,7 +18,7 @@ class FhirMessage {
     required this.expirationTime,
     required this.dequeueCount,
     required this.popReceipt,
-    required this.body,
+    required this.fhirEvent,
   });
 
   static FhirMessage fromAzureQMessage(AzureQMessage message) {
@@ -30,19 +30,19 @@ class FhirMessage {
       insertationTime: message.insertionTime ?? "",
       expirationTime: message.expirationTime ?? "",
       dequeueCount: int.parse(message.dequeueCount ?? ""),
-      body: fhirEvent,
+      fhirEvent: fhirEvent,
     );
   }
 
   String bodyToJson() {
-    return jsonEncode(body.toJson());
+    return jsonEncode(fhirEvent.toJson());
   }
 
   copyWith({
     String? expirationTime,
     String? insertationTime,
     int? dequeueCount,
-    FhirEvent? body,
+    FhirEvent? fhirEvent,
   }) {
     return FhirMessage(
       id: id,
@@ -50,7 +50,7 @@ class FhirMessage {
       expirationTime: insertationTime ?? this.insertationTime,
       dequeueCount: dequeueCount ?? this.dequeueCount,
       popReceipt: popReceipt,
-      body: body ?? this.body,
+      fhirEvent: fhirEvent ?? this.fhirEvent,
     );
   }
 }

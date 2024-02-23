@@ -23,7 +23,10 @@ class AzureMessageClient implements FhirMessageClientAbstract {
 
   @override
   Future<bool> queueIsNotEmpty() async {
-    List<AzureQMessage> messages = await _storage.peekQmessages(qName: _queueName, numofmessages: 10);
+    List<AzureQMessage> messages = await _storage.peekQmessages(
+      qName: _queueName,
+      numofmessages: 10,
+    );
 
     return messages.isNotEmpty;
   }
