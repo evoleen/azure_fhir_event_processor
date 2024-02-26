@@ -12,7 +12,7 @@ import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
-import 'event_processor_test.dart' as _i5;
+import 'mocks.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -125,4 +125,115 @@ class MockTmpValidator extends _i1.Mock implements _i5.TmpValidator {
           ),
         )),
       ) as _i3.Future<_i2.HandlerResult>);
+}
+
+/// A class which mocks [DeleteActionExecutor].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockDeleteActionExecutor extends _i1.Mock
+    implements _i5.DeleteActionExecutor {
+  MockDeleteActionExecutor() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.FhirEventType get type => (super.noSuchMethod(
+        Invocation.getter(#type),
+        returnValue: _i6.FhirEventType.resourceDeleted,
+      ) as _i6.FhirEventType);
+
+  @override
+  _i3.Future<void> execute({required _i2.FhirEvent? fhirEvent}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [],
+          {#fhirEvent: fhirEvent},
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+}
+
+/// A class which mocks [UpdateActionExecutor].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUpdateActionExecutor extends _i1.Mock
+    implements _i5.UpdateActionExecutor {
+  MockUpdateActionExecutor() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.FhirEventType get type => (super.noSuchMethod(
+        Invocation.getter(#type),
+        returnValue: _i6.FhirEventType.resourceDeleted,
+      ) as _i6.FhirEventType);
+
+  @override
+  _i3.Future<void> execute({required _i2.FhirEvent? fhirEvent}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [],
+          {#fhirEvent: fhirEvent},
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+}
+
+/// A class which mocks [CreateActionExecutor].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCreateActionExecutor extends _i1.Mock
+    implements _i5.CreateActionExecutor {
+  MockCreateActionExecutor() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.FhirEventType get type => (super.noSuchMethod(
+        Invocation.getter(#type),
+        returnValue: _i6.FhirEventType.resourceDeleted,
+      ) as _i6.FhirEventType);
+
+  @override
+  _i3.Future<void> execute({required _i2.FhirEvent? fhirEvent}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [],
+          {#fhirEvent: fhirEvent},
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+}
+
+/// A class which mocks [TmpPostProcessor].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTmpPostProcessor extends _i1.Mock implements _i5.TmpPostProcessor {
+  MockTmpPostProcessor() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.Future<void> apply({
+    required _i4.FhirMessage? fhirMessage,
+    required _i6.FhirMessageClientAbstract? messageClient,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #apply,
+          [],
+          {
+            #fhirMessage: fhirMessage,
+            #messageClient: messageClient,
+          },
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
 }
