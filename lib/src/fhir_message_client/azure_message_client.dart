@@ -79,7 +79,7 @@ class AzureMessageClient implements FhirMessageClientAbstract {
     // We decode from base64 and get json string
     azureMessage.messageText = _getDecoder().decode(
       azureMessage.messageText ?? "",
-    ); // _base64TxtDecode(azureMessage.messageText);
+    );
     FhirMessage fhirMessage = FhirMessage.fromAzureQMessage(azureMessage);
 
     return fhirMessage;
