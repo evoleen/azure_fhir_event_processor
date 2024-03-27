@@ -4,6 +4,7 @@ abstract class FhirMessageClientAbstract {
   Future<List<FhirMessage>> consumeMessages({required int messagesCount});
   Future<void> removeMessage({required FhirMessage fhirMessage});
   Future<bool> queueIsNotEmpty();
+  Future<void> sanitizeMessage({required FhirMessage fhirPoisonedMessage});
 }
 
 enum FhirEventType {
