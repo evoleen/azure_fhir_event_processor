@@ -47,6 +47,19 @@ class MockAzureMessageClient extends _i1.Mock
   }
 
   @override
+  _i3.Future<void> sanitizeMessage(
+          {required _i4.FhirMessage? fhirPoisonedMessage}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sanitizeMessage,
+          [],
+          {#fhirPoisonedMessage: fhirPoisonedMessage},
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+
+  @override
   _i3.Future<bool> queueIsNotEmpty() => (super.noSuchMethod(
         Invocation.method(
           #queueIsNotEmpty,

@@ -1,31 +1,17 @@
-class FhirEventBody {
-  final String resourceFhirId;
-  final String resourceType;
-  final String resourceFhirAccount;
-  final int resourceVersionId;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  FhirEventBody({
-    required this.resourceFhirId,
-    required this.resourceType,
-    required this.resourceFhirAccount,
-    required this.resourceVersionId,
-  });
+part 'fhir_event_body.freezed.dart';
+part 'fhir_event_body.g.dart';
 
-  static FhirEventBody fromJsonObj(Map<String, dynamic> jsonObj) {
-    return FhirEventBody(
-      resourceFhirId: jsonObj['resourceFhirId'],
-      resourceType: jsonObj['resourceType'],
-      resourceFhirAccount: jsonObj['resourceFhirAccount'],
-      resourceVersionId: jsonObj['resourceVersionId'],
-    );
-  }
+@freezed
+class FhirEventBody with _$FhirEventBody {
+  const factory FhirEventBody({
+    required String resourceFhirId,
+    required String resourceType,
+    required String resourceFhirAccount,
+    required int resourceVersionId,
+  }) = _FhirEventBody;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'resourceFhirId': resourceFhirId,
-      'resourceType': resourceType,
-      'resourceFhirAccount': resourceFhirAccount,
-      'resourceVersionId': resourceVersionId
-    };
-  }
+  factory FhirEventBody.fromJson(Map<String, Object?> json) =>
+      _$FhirEventBodyFromJson(json);
 }
