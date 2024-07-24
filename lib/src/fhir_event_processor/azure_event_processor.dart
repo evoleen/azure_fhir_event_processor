@@ -70,9 +70,7 @@ class AzureEventProcessor implements AbstractFhirEventProcessor {
 
   Future<void> _executeActions(FhirMessage fhirMessage) async {
     for (final executor in _actionExecutors) {
-      if (executor.type.name == fhirMessage.fhirEvent.eventType) {
-        await executor.execute(fhirEvent: fhirMessage.fhirEvent);
-      }
+      await executor.execute(fhirEvent: fhirMessage.fhirEvent);
     }
   }
 
