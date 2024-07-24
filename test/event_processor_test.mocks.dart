@@ -115,7 +115,7 @@ class MockTmpValidator extends _i1.Mock implements _i5.TmpValidator {
   @override
   _i3.Future<_i2.HandlerResult> handleException({
     required _i4.FhirMessage? fhirMessage,
-    required _i6.FhirMessageClientAbstract? messageClient,
+    required _i6.AbstractFhirMessageClient? messageClient,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -235,7 +235,7 @@ class MockTmpPostProcessor extends _i1.Mock implements _i5.TmpPostProcessor {
   @override
   _i3.Future<void> apply({
     required _i4.FhirMessage? fhirMessage,
-    required _i6.FhirMessageClientAbstract? messageClient,
+    required _i6.AbstractFhirMessageClient? messageClient,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

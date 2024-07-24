@@ -3,7 +3,7 @@ import 'package:azstore/azstore.dart';
 import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
 import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
 
-class AzureMessageClient implements FhirMessageClientAbstract {
+class AzureMessageClient implements AbstractFhirMessageClient {
   late AzureStorage _storage;
   late String _connectionString;
   late String _queueName;
@@ -14,13 +14,13 @@ class AzureMessageClient implements FhirMessageClientAbstract {
     required connectionString,
     required String queueName,
     String? poisonQueueName,
-    int? msgVisibilityTimeout,
+    int? messageVisibilityTimeout,
     AzureStorage? azureStorage,
   }) {
     _connectionString = connectionString;
     _queueName = queueName;
     _poisonQueueName = poisonQueueName ?? "poison-messages";
-    _msgVisibilityTimeout = msgVisibilityTimeout ?? 30;
+    _msgVisibilityTimeout = messageVisibilityTimeout ?? 30;
     _storage = azureStorage ?? AzureStorage.parse(_connectionString);
   }
 

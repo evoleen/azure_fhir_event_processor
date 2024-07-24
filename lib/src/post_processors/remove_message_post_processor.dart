@@ -2,11 +2,11 @@ import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_post_proce
 import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
 import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
 
-class RemoveMessagePostProcessor implements PostProcessorAbstract {
+class RemoveMessagePostProcessor implements AbstractPostProcessor {
   @override
   Future<void> apply({
     required FhirMessage fhirMessage,
-    required FhirMessageClientAbstract messageClient,
+    required AbstractFhirMessageClient messageClient,
   }) async {
     await messageClient.removeMessage(fhirMessage: fhirMessage);
   }

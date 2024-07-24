@@ -1,6 +1,6 @@
 import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
 
-abstract class FhirMessageClientAbstract {
+abstract class AbstractFhirMessageClient {
   Future<List<FhirMessage>> consumeMessages({required int messagesCount});
   Future<void> removeMessage({required FhirMessage fhirMessage});
   Future<bool> queueIsNotEmpty();

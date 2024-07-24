@@ -3,7 +3,7 @@ import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_messag
 import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
 import 'package:evoleen_fhir_events/src/validators/abstract_event_validator.dart';
 
-class PoisonEventValidator implements EventValidatorAbstract {
+class PoisonEventValidator implements AbstractEventValidator {
   late final int _dequeueCount;
 
   PoisonEventValidator({int? dequeueCount}) {
@@ -21,7 +21,7 @@ class PoisonEventValidator implements EventValidatorAbstract {
   @override
   Future<HandlerResult> handleException({
     required FhirMessage fhirMessage,
-    required FhirMessageClientAbstract messageClient,
+    required AbstractFhirMessageClient messageClient,
   }) async {
     await messageClient.sanitizeMessage(fhirPoisonedMessage: fhirMessage);
 

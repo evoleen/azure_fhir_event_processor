@@ -1,6 +1,6 @@
 import 'package:evoleen_fhir_events/evoleen_fhir_events.dart';
 
-class TmpValidator implements EventValidatorAbstract {
+class TmpValidator implements AbstractEventValidator {
   @override
   void validate({required FhirMessage fhirMessage}) {
     // All is good, we don't throw an exception
@@ -9,13 +9,13 @@ class TmpValidator implements EventValidatorAbstract {
   @override
   Future<HandlerResult> handleException({
     required FhirMessage fhirMessage,
-    required FhirMessageClientAbstract messageClient,
+    required AbstractFhirMessageClient messageClient,
   }) {
     return Future.value(HandlerResult(hasToRethrow: false));
   }
 }
 
-class ValidatorPass implements EventValidatorAbstract {
+class ValidatorPass implements AbstractEventValidator {
   @override
   void validate({required FhirMessage fhirMessage}) {
     // All is good, we don't throw an exception
@@ -24,13 +24,13 @@ class ValidatorPass implements EventValidatorAbstract {
   @override
   Future<HandlerResult> handleException({
     required FhirMessage fhirMessage,
-    required FhirMessageClientAbstract messageClient,
+    required AbstractFhirMessageClient messageClient,
   }) {
     return Future.value(HandlerResult(hasToRethrow: false));
   }
 }
 
-class ValidatorFail implements EventValidatorAbstract {
+class ValidatorFail implements AbstractEventValidator {
   @override
   void validate({required FhirMessage fhirMessage}) {
     throw MessageValidatorException("Test validator fails");
@@ -39,13 +39,13 @@ class ValidatorFail implements EventValidatorAbstract {
   @override
   Future<HandlerResult> handleException({
     required FhirMessage fhirMessage,
-    required FhirMessageClientAbstract messageClient,
+    required AbstractFhirMessageClient messageClient,
   }) {
     return Future.value(HandlerResult.shouldRethrow());
   }
 }
 
-class DeleteActionExecutor implements ActionExecutorAbstract {
+class DeleteActionExecutor implements AbstractActionExecutor {
   @override
   FhirEventType get type => FhirEventType.resourceDeleted;
 
@@ -53,7 +53,7 @@ class DeleteActionExecutor implements ActionExecutorAbstract {
   Future<void> execute({required FhirEvent fhirEvent}) async {}
 }
 
-class UpdateActionExecutor implements ActionExecutorAbstract {
+class UpdateActionExecutor implements AbstractActionExecutor {
   @override
   FhirEventType get type => FhirEventType.resourceUpdated;
 
@@ -61,7 +61,7 @@ class UpdateActionExecutor implements ActionExecutorAbstract {
   Future<void> execute({required FhirEvent fhirEvent}) async {}
 }
 
-class CreateActionExecutor implements ActionExecutorAbstract {
+class CreateActionExecutor implements AbstractActionExecutor {
   @override
   Future<void> execute({required FhirEvent fhirEvent}) {
     return Future<void>.value();
@@ -71,11 +71,11 @@ class CreateActionExecutor implements ActionExecutorAbstract {
   FhirEventType get type => FhirEventType.resourceCreated;
 }
 
-class TmpPostProcessor implements PostProcessorAbstract {
+class TmpPostProcessor implements AbstractPostProcessor {
   @override
   Future<void> apply({
     required FhirMessage fhirMessage,
-    required FhirMessageClientAbstract messageClient,
+    required AbstractFhirMessageClient messageClient,
   }) {
     return Future<void>.value();
   }

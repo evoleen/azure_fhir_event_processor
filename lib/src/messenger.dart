@@ -8,26 +8,26 @@ import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_messag
 import 'package:evoleen_fhir_events/src/fhir_message_client/azure_message_client.dart';
 import 'package:evoleen_fhir_events/src/validators/abstract_event_validator.dart';
 
-class Messanger implements MessangerAbstract {
-  final FhirEventProcessorAbstract _eventProcessor;
+class Messenger implements MessengerAbstract {
+  final AbstractFhirEventProcessor _eventProcessor;
 
-  Messanger(this._eventProcessor);
+  Messenger(this._eventProcessor);
 
-  factory Messanger.setupWithAzure({
+  factory Messenger.setupWithAzure({
     required String connectionString,
     required queueName,
-    required List<EventValidatorAbstract> eventValidators,
-    required List<ActionExecutorAbstract> actionExecutors,
-    List<PostProcessorAbstract>? postProcessors,
-    int? msgVisibilityTimeout,
+    required List<AbstractEventValidator> eventValidators,
+    required List<AbstractActionExecutor> actionExecutors,
+    List<AbstractPostProcessor>? postProcessors,
+    int? messageVisibilityTimeout,
   }) {
-    FhirMessageClientAbstract messageClient = AzureMessageClient(
+    AbstractFhirMessageClient messageClient = AzureMessageClient(
       connectionString: connectionString,
       queueName: queueName,
-      msgVisibilityTimeout: msgVisibilityTimeout,
+      messageVisibilityTimeout: messageVisibilityTimeout,
     );
 
-    FhirEventProcessorAbstract eventProcessor =
+    AbstractFhirEventProcessor eventProcessor =
         AzureEventProcessor(messageClient: messageClient);
     for (final eventValidator in eventValidators) {
       eventProcessor.addValidator(eventValidator);
@@ -39,7 +39,7 @@ class Messanger implements MessangerAbstract {
       eventProcessor.addPostProcessor(postProcessor);
     }
 
-    return Messanger(eventProcessor);
+    return Messenger(eventProcessor);
   }
 
   @override

@@ -7,11 +7,11 @@ import 'package:evoleen_fhir_events/src/validators/abstract_event_validator.dart
 import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_action_executor.dart';
 import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_fhir_event_processor.dart';
 
-class AzureEventProcessor implements FhirEventProcessorAbstract {
-  late FhirMessageClientAbstract _messageClient;
-  final List<EventValidatorAbstract> _validators = [];
-  final List<ActionExecutorAbstract> _actionExecutors = [];
-  final List<PostProcessorAbstract> _postProcessors = [];
+class AzureEventProcessor implements AbstractFhirEventProcessor {
+  late AbstractFhirMessageClient _messageClient;
+  final List<AbstractEventValidator> _validators = [];
+  final List<AbstractActionExecutor> _actionExecutors = [];
+  final List<AbstractPostProcessor> _postProcessors = [];
 
   AzureEventProcessor({required messageClient}) {
     _messageClient = messageClient;
@@ -37,17 +37,17 @@ class AzureEventProcessor implements FhirEventProcessorAbstract {
   }
 
   @override
-  void addActionExecutor(ActionExecutorAbstract actionExecutor) {
+  void addActionExecutor(AbstractActionExecutor actionExecutor) {
     _actionExecutors.add(actionExecutor);
   }
 
   @override
-  void addValidator(EventValidatorAbstract eventValidator) {
+  void addValidator(AbstractEventValidator eventValidator) {
     _validators.add(eventValidator);
   }
 
   @override
-  void addPostProcessor(PostProcessorAbstract postProcessor) {
+  void addPostProcessor(AbstractPostProcessor postProcessor) {
     _postProcessors.add(postProcessor);
   }
 
