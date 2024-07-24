@@ -4,16 +4,17 @@ import '../fhir_message_client/models/fhir_message.dart';
 import 'abstract_event_validator.dart';
 
 class PoisonEventValidator implements EventValidatorAbstract {
-  late final int _dequeuCount;
+  late final int _dequeueCount;
 
   PoisonEventValidator({int? dequeueCount}) {
-    _dequeuCount = dequeueCount ?? 10;
+    _dequeueCount = dequeueCount ?? 10;
   }
 
   @override
   void validate({required FhirMessage fhirMessage}) {
-    if (fhirMessage.dequeueCount >= _dequeuCount) {
-      throw MessageValidatorException("Message ${fhirMessage.id} might be poisoned");
+    if (fhirMessage.dequeueCount >= _dequeueCount) {
+      throw MessageValidatorException(
+          "Message ${fhirMessage.id} might be poisoned");
     }
   }
 

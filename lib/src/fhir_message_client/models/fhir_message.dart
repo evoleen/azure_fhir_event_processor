@@ -3,7 +3,7 @@ import 'fhir_event.dart';
 
 class FhirMessage {
   final String id;
-  final String insertationTime;
+  final String insertionTime;
   final String expirationTime;
   final int dequeueCount;
   final String popReceipt;
@@ -11,7 +11,7 @@ class FhirMessage {
 
   FhirMessage({
     required this.id,
-    required this.insertationTime,
+    required this.insertionTime,
     required this.expirationTime,
     required this.dequeueCount,
     required this.popReceipt,
@@ -24,7 +24,7 @@ class FhirMessage {
     return FhirMessage(
       id: message.messageId ?? "",
       popReceipt: message.popReceipt ?? "",
-      insertationTime: message.insertionTime ?? "",
+      insertionTime: message.insertionTime ?? "",
       expirationTime: message.expirationTime ?? "",
       dequeueCount: int.parse(message.dequeueCount ?? ""),
       fhirEvent: fhirEvent,
@@ -35,7 +35,7 @@ class FhirMessage {
     return {
       "id": id,
       "popReceipt": popReceipt,
-      "insertationTime": insertationTime,
+      "insertationTime": insertionTime,
       "expirationTime": expirationTime,
       "dequeueCount": dequeueCount,
       "fhirEvent": fhirEvent.toJson(),
@@ -44,14 +44,14 @@ class FhirMessage {
 
   copyWith({
     String? expirationTime,
-    String? insertationTime,
+    String? insertionTime,
     int? dequeueCount,
     FhirEvent? fhirEvent,
   }) {
     return FhirMessage(
       id: id,
-      insertationTime: expirationTime ?? this.expirationTime,
-      expirationTime: insertationTime ?? this.insertationTime,
+      insertionTime: expirationTime ?? this.expirationTime,
+      expirationTime: insertionTime ?? this.insertionTime,
       dequeueCount: dequeueCount ?? this.dequeueCount,
       popReceipt: popReceipt,
       fhirEvent: fhirEvent ?? this.fhirEvent,

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'abstract_messanger.dart';
+import 'abstract_messenger.dart';
 import 'fhir_event_processor/abstract_action_executor.dart';
 import 'fhir_event_processor/abstract_fhir_event_processor.dart';
 import 'fhir_event_processor/abstract_post_processor.dart';
@@ -27,7 +27,8 @@ class Messanger implements MessangerAbstract {
       msgVisibilityTimeout: msgVisibilityTimeout,
     );
 
-    FhirEventProcessorAbstract eventProcessor = AzureEventProcessor(messageClient: messageClient);
+    FhirEventProcessorAbstract eventProcessor =
+        AzureEventProcessor(messageClient: messageClient);
     for (final eventValidator in eventValidators) {
       eventProcessor.addValidator(eventValidator);
     }
@@ -42,7 +43,9 @@ class Messanger implements MessangerAbstract {
   }
 
   @override
-  Future<void> listen({required Function(Object e) processExceptionHandler, Duration? sleepDuration}) async {
+  Future<void> listen(
+      {required Function(Object e) processExceptionHandler,
+      Duration? sleepDuration}) async {
     final finalSleepDuration = sleepDuration ?? Duration(seconds: 20);
 
     while (true) {

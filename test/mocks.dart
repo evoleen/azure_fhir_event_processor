@@ -85,14 +85,16 @@ FhirMessage getFhirMessageMock({required fhirEventType}) {
   final FhirEventBody fhirEventBody = FhirEventBody(
     resourceFhirId: "9f4e6650-e585-4b33-9aff-f6049b7f7b94",
     resourceType: "Patient",
-    resourceFhirAccount: "evoleenworkspace-evoleen-data.fhir.azurehealthcareapis.com",
+    resourceFhirAccount:
+        "evoleenworkspace-evoleen-data.fhir.azurehealthcareapis.com",
     resourceVersionId: 2,
   );
   final FhirEvent fhirEvent = FhirEvent(
     id: "f80bf449-2084-0c5b-a66b-872bef7f592c",
     topic:
         "/subscriptions/949f4f90-da65-47c3-8694-92bda0294259/resourceGroups/evoleen-dev-resource-group/providers/Microsoft.HealthcareApis/workspaces/evoleenworkspace",
-    subject: "evoleenworkspace-evoleen-data.fhir.azurehealthcareapis.com/Patient/9f4e6650-e585-4b33-9aff-f6049b7f7b94",
+    subject:
+        "evoleenworkspace-evoleen-data.fhir.azurehealthcareapis.com/Patient/9f4e6650-e585-4b33-9aff-f6049b7f7b94",
     eventType: fhirEventType,
     dataVersion: "2",
     metadataVersion: "1",
@@ -102,7 +104,7 @@ FhirMessage getFhirMessageMock({required fhirEventType}) {
 
   return FhirMessage(
     id: "12-212-abc",
-    insertationTime: "time as string",
+    insertionTime: "time as string",
     expirationTime: "time as string",
     dequeueCount: 0,
     popReceipt: 'aa-bb',
