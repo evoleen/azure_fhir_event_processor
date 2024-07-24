@@ -10,7 +10,7 @@ class FhirEvent with _$FhirEvent {
     required String id,
     required String topic,
     required String subject,
-    required FhirEventBody body,
+    required FhirEventData data,
     required String eventType,
     required String dataVersion,
     required String metadataVersion,

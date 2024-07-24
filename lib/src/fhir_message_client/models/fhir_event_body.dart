@@ -4,14 +4,14 @@ part 'fhir_event_body.freezed.dart';
 part 'fhir_event_body.g.dart';
 
 @freezed
-class FhirEventBody with _$FhirEventBody {
-  const factory FhirEventBody({
+class FhirEventData with _$FhirEventData {
+  const factory FhirEventData({
     required String resourceFhirId,
     required String resourceType,
     required String resourceFhirAccount,
     required int resourceVersionId,
-  }) = _FhirEventBody;
+  }) = _FhirEventData;
 
-  factory FhirEventBody.fromJson(Map<String, Object?> json) =>
-      _$FhirEventBodyFromJson(json);
+  factory FhirEventData.fromJson(Map<String, Object?> json) =>
+      _$FhirEventDataFromJson(json);
 }

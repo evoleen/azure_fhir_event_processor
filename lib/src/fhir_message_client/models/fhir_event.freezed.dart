@@ -23,7 +23,7 @@ mixin _$FhirEvent {
   String get id => throw _privateConstructorUsedError;
   String get topic => throw _privateConstructorUsedError;
   String get subject => throw _privateConstructorUsedError;
-  FhirEventBody get body => throw _privateConstructorUsedError;
+  FhirEventData get data => throw _privateConstructorUsedError;
   String get eventType => throw _privateConstructorUsedError;
   String get dataVersion => throw _privateConstructorUsedError;
   String get metadataVersion => throw _privateConstructorUsedError;
@@ -48,13 +48,13 @@ abstract class $FhirEventCopyWith<$Res> {
       {String id,
       String topic,
       String subject,
-      FhirEventBody body,
+      FhirEventData data,
       String eventType,
       String dataVersion,
       String metadataVersion,
       String eventTime});
 
-  $FhirEventBodyCopyWith<$Res> get body;
+  $FhirEventDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$FhirEventCopyWithImpl<$Res, $Val extends FhirEvent>
     Object? id = null,
     Object? topic = null,
     Object? subject = null,
-    Object? body = null,
+    Object? data = null,
     Object? eventType = null,
     Object? dataVersion = null,
     Object? metadataVersion = null,
@@ -94,10 +94,10 @@ class _$FhirEventCopyWithImpl<$Res, $Val extends FhirEvent>
           ? _value.subject
           : subject // ignore: cast_nullable_to_non_nullable
               as String,
-      body: null == body
-          ? _value.body
-          : body // ignore: cast_nullable_to_non_nullable
-              as FhirEventBody,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as FhirEventData,
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
@@ -121,9 +121,9 @@ class _$FhirEventCopyWithImpl<$Res, $Val extends FhirEvent>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $FhirEventBodyCopyWith<$Res> get body {
-    return $FhirEventBodyCopyWith<$Res>(_value.body, (value) {
-      return _then(_value.copyWith(body: value) as $Val);
+  $FhirEventDataCopyWith<$Res> get data {
+    return $FhirEventDataCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
     });
   }
 }
@@ -140,14 +140,14 @@ abstract class _$$FhirEventImplCopyWith<$Res>
       {String id,
       String topic,
       String subject,
-      FhirEventBody body,
+      FhirEventData data,
       String eventType,
       String dataVersion,
       String metadataVersion,
       String eventTime});
 
   @override
-  $FhirEventBodyCopyWith<$Res> get body;
+  $FhirEventDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -166,7 +166,7 @@ class __$$FhirEventImplCopyWithImpl<$Res>
     Object? id = null,
     Object? topic = null,
     Object? subject = null,
-    Object? body = null,
+    Object? data = null,
     Object? eventType = null,
     Object? dataVersion = null,
     Object? metadataVersion = null,
@@ -185,10 +185,10 @@ class __$$FhirEventImplCopyWithImpl<$Res>
           ? _value.subject
           : subject // ignore: cast_nullable_to_non_nullable
               as String,
-      body: null == body
-          ? _value.body
-          : body // ignore: cast_nullable_to_non_nullable
-              as FhirEventBody,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as FhirEventData,
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
@@ -216,7 +216,7 @@ class _$FhirEventImpl implements _FhirEvent {
       {required this.id,
       required this.topic,
       required this.subject,
-      required this.body,
+      required this.data,
       required this.eventType,
       required this.dataVersion,
       required this.metadataVersion,
@@ -232,7 +232,7 @@ class _$FhirEventImpl implements _FhirEvent {
   @override
   final String subject;
   @override
-  final FhirEventBody body;
+  final FhirEventData data;
   @override
   final String eventType;
   @override
@@ -244,7 +244,7 @@ class _$FhirEventImpl implements _FhirEvent {
 
   @override
   String toString() {
-    return 'FhirEvent(id: $id, topic: $topic, subject: $subject, body: $body, eventType: $eventType, dataVersion: $dataVersion, metadataVersion: $metadataVersion, eventTime: $eventTime)';
+    return 'FhirEvent(id: $id, topic: $topic, subject: $subject, data: $data, eventType: $eventType, dataVersion: $dataVersion, metadataVersion: $metadataVersion, eventTime: $eventTime)';
   }
 
   @override
@@ -255,7 +255,7 @@ class _$FhirEventImpl implements _FhirEvent {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.topic, topic) || other.topic == topic) &&
             (identical(other.subject, subject) || other.subject == subject) &&
-            (identical(other.body, body) || other.body == body) &&
+            (identical(other.data, data) || other.data == data) &&
             (identical(other.eventType, eventType) ||
                 other.eventType == eventType) &&
             (identical(other.dataVersion, dataVersion) ||
@@ -268,7 +268,7 @@ class _$FhirEventImpl implements _FhirEvent {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, topic, subject, body,
+  int get hashCode => Object.hash(runtimeType, id, topic, subject, data,
       eventType, dataVersion, metadataVersion, eventTime);
 
   /// Create a copy of FhirEvent
@@ -292,7 +292,7 @@ abstract class _FhirEvent implements FhirEvent {
       {required final String id,
       required final String topic,
       required final String subject,
-      required final FhirEventBody body,
+      required final FhirEventData data,
       required final String eventType,
       required final String dataVersion,
       required final String metadataVersion,
@@ -308,7 +308,7 @@ abstract class _FhirEvent implements FhirEvent {
   @override
   String get subject;
   @override
-  FhirEventBody get body;
+  FhirEventData get data;
   @override
   String get eventType;
   @override

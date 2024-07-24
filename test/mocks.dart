@@ -82,7 +82,7 @@ class TmpPostProcessor implements PostProcessorAbstract {
 }
 
 FhirMessage getFhirMessageMock({required fhirEventType}) {
-  final FhirEventBody fhirEventBody = FhirEventBody(
+  final FhirEventData fhirEventData = FhirEventData(
     resourceFhirId: "9f4e6650-e585-4b33-9aff-f6049b7f7b94",
     resourceType: "Patient",
     resourceFhirAccount:
@@ -99,7 +99,7 @@ FhirMessage getFhirMessageMock({required fhirEventType}) {
     dataVersion: "2",
     metadataVersion: "1",
     eventTime: "2024-02-22T14:35:24.9530912Z",
-    body: fhirEventBody,
+    data: fhirEventData,
   );
 
   return FhirMessage(

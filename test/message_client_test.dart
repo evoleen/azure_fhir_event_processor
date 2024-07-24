@@ -45,11 +45,13 @@ void main() {
         return list;
       });
 
-      List<FhirMessage> list = await azureMessageClient.consumeMessages(messagesCount: 1);
+      List<FhirMessage> list =
+          await azureMessageClient.consumeMessages(messagesCount: 1);
       fhirMessage = list.first;
       expect(fhirMessage.id, "ddd-8438ecb7-06a2-4f04-b8b2-211b6f236003");
       expect(fhirMessage.fhirEvent, isA<FhirEvent>());
-      expect(fhirMessage.fhirEvent.body.resourceFhirId, "60e27fa3-e740-4a56-b20e-b6cd7f3c369b");
+      expect(fhirMessage.fhirEvent.data.resourceFhirId,
+          "60e27fa3-e740-4a56-b20e-b6cd7f3c369b");
     });
 
     test('it can check queue is empty or not', () async {

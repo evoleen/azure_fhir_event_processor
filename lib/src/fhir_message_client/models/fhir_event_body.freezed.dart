@@ -14,32 +14,32 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-FhirEventBody _$FhirEventBodyFromJson(Map<String, dynamic> json) {
-  return _FhirEventBody.fromJson(json);
+FhirEventData _$FhirEventDataFromJson(Map<String, dynamic> json) {
+  return _FhirEventData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$FhirEventBody {
+mixin _$FhirEventData {
   String get resourceFhirId => throw _privateConstructorUsedError;
   String get resourceType => throw _privateConstructorUsedError;
   String get resourceFhirAccount => throw _privateConstructorUsedError;
   int get resourceVersionId => throw _privateConstructorUsedError;
 
-  /// Serializes this FhirEventBody to a JSON map.
+  /// Serializes this FhirEventData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of FhirEventBody
+  /// Create a copy of FhirEventData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $FhirEventBodyCopyWith<FhirEventBody> get copyWith =>
+  $FhirEventDataCopyWith<FhirEventData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FhirEventBodyCopyWith<$Res> {
-  factory $FhirEventBodyCopyWith(
-          FhirEventBody value, $Res Function(FhirEventBody) then) =
-      _$FhirEventBodyCopyWithImpl<$Res, FhirEventBody>;
+abstract class $FhirEventDataCopyWith<$Res> {
+  factory $FhirEventDataCopyWith(
+          FhirEventData value, $Res Function(FhirEventData) then) =
+      _$FhirEventDataCopyWithImpl<$Res, FhirEventData>;
   @useResult
   $Res call(
       {String resourceFhirId,
@@ -49,16 +49,16 @@ abstract class $FhirEventBodyCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FhirEventBodyCopyWithImpl<$Res, $Val extends FhirEventBody>
-    implements $FhirEventBodyCopyWith<$Res> {
-  _$FhirEventBodyCopyWithImpl(this._value, this._then);
+class _$FhirEventDataCopyWithImpl<$Res, $Val extends FhirEventData>
+    implements $FhirEventDataCopyWith<$Res> {
+  _$FhirEventDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of FhirEventBody
+  /// Create a copy of FhirEventData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -90,11 +90,11 @@ class _$FhirEventBodyCopyWithImpl<$Res, $Val extends FhirEventBody>
 }
 
 /// @nodoc
-abstract class _$$FhirEventBodyImplCopyWith<$Res>
-    implements $FhirEventBodyCopyWith<$Res> {
-  factory _$$FhirEventBodyImplCopyWith(
-          _$FhirEventBodyImpl value, $Res Function(_$FhirEventBodyImpl) then) =
-      __$$FhirEventBodyImplCopyWithImpl<$Res>;
+abstract class _$$FhirEventDataImplCopyWith<$Res>
+    implements $FhirEventDataCopyWith<$Res> {
+  factory _$$FhirEventDataImplCopyWith(
+          _$FhirEventDataImpl value, $Res Function(_$FhirEventDataImpl) then) =
+      __$$FhirEventDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,14 +105,14 @@ abstract class _$$FhirEventBodyImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$FhirEventBodyImplCopyWithImpl<$Res>
-    extends _$FhirEventBodyCopyWithImpl<$Res, _$FhirEventBodyImpl>
-    implements _$$FhirEventBodyImplCopyWith<$Res> {
-  __$$FhirEventBodyImplCopyWithImpl(
-      _$FhirEventBodyImpl _value, $Res Function(_$FhirEventBodyImpl) _then)
+class __$$FhirEventDataImplCopyWithImpl<$Res>
+    extends _$FhirEventDataCopyWithImpl<$Res, _$FhirEventDataImpl>
+    implements _$$FhirEventDataImplCopyWith<$Res> {
+  __$$FhirEventDataImplCopyWithImpl(
+      _$FhirEventDataImpl _value, $Res Function(_$FhirEventDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of FhirEventBody
+  /// Create a copy of FhirEventData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -122,7 +122,7 @@ class __$$FhirEventBodyImplCopyWithImpl<$Res>
     Object? resourceFhirAccount = null,
     Object? resourceVersionId = null,
   }) {
-    return _then(_$FhirEventBodyImpl(
+    return _then(_$FhirEventDataImpl(
       resourceFhirId: null == resourceFhirId
           ? _value.resourceFhirId
           : resourceFhirId // ignore: cast_nullable_to_non_nullable
@@ -145,15 +145,15 @@ class __$$FhirEventBodyImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FhirEventBodyImpl implements _FhirEventBody {
-  const _$FhirEventBodyImpl(
+class _$FhirEventDataImpl implements _FhirEventData {
+  const _$FhirEventDataImpl(
       {required this.resourceFhirId,
       required this.resourceType,
       required this.resourceFhirAccount,
       required this.resourceVersionId});
 
-  factory _$FhirEventBodyImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FhirEventBodyImplFromJson(json);
+  factory _$FhirEventDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FhirEventDataImplFromJson(json);
 
   @override
   final String resourceFhirId;
@@ -166,14 +166,14 @@ class _$FhirEventBodyImpl implements _FhirEventBody {
 
   @override
   String toString() {
-    return 'FhirEventBody(resourceFhirId: $resourceFhirId, resourceType: $resourceType, resourceFhirAccount: $resourceFhirAccount, resourceVersionId: $resourceVersionId)';
+    return 'FhirEventData(resourceFhirId: $resourceFhirId, resourceType: $resourceType, resourceFhirAccount: $resourceFhirAccount, resourceVersionId: $resourceVersionId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FhirEventBodyImpl &&
+            other is _$FhirEventDataImpl &&
             (identical(other.resourceFhirId, resourceFhirId) ||
                 other.resourceFhirId == resourceFhirId) &&
             (identical(other.resourceType, resourceType) ||
@@ -189,31 +189,31 @@ class _$FhirEventBodyImpl implements _FhirEventBody {
   int get hashCode => Object.hash(runtimeType, resourceFhirId, resourceType,
       resourceFhirAccount, resourceVersionId);
 
-  /// Create a copy of FhirEventBody
+  /// Create a copy of FhirEventData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FhirEventBodyImplCopyWith<_$FhirEventBodyImpl> get copyWith =>
-      __$$FhirEventBodyImplCopyWithImpl<_$FhirEventBodyImpl>(this, _$identity);
+  _$$FhirEventDataImplCopyWith<_$FhirEventDataImpl> get copyWith =>
+      __$$FhirEventDataImplCopyWithImpl<_$FhirEventDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FhirEventBodyImplToJson(
+    return _$$FhirEventDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _FhirEventBody implements FhirEventBody {
-  const factory _FhirEventBody(
+abstract class _FhirEventData implements FhirEventData {
+  const factory _FhirEventData(
       {required final String resourceFhirId,
       required final String resourceType,
       required final String resourceFhirAccount,
-      required final int resourceVersionId}) = _$FhirEventBodyImpl;
+      required final int resourceVersionId}) = _$FhirEventDataImpl;
 
-  factory _FhirEventBody.fromJson(Map<String, dynamic> json) =
-      _$FhirEventBodyImpl.fromJson;
+  factory _FhirEventData.fromJson(Map<String, dynamic> json) =
+      _$FhirEventDataImpl.fromJson;
 
   @override
   String get resourceFhirId;
@@ -224,10 +224,10 @@ abstract class _FhirEventBody implements FhirEventBody {
   @override
   int get resourceVersionId;
 
-  /// Create a copy of FhirEventBody
+  /// Create a copy of FhirEventData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FhirEventBodyImplCopyWith<_$FhirEventBodyImpl> get copyWith =>
+  _$$FhirEventDataImplCopyWith<_$FhirEventDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
