@@ -11,7 +11,7 @@ dependencies:
   azstore: 1.0.3
 
 dev_dependencies:
-  lints: ^2.1.0
+  lints: ^4.0.0
   test: ^1.24.0
   mockito: 5.4.4
-  build_runner: 2.4.8
+  build_runner: 2.4.11
