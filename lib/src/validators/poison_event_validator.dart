@@ -1,7 +1,7 @@
-import '../errors.dart';
-import '../fhir_message_client/abstract_fhir_message_client.dart';
-import '../fhir_message_client/models/fhir_message.dart';
-import 'abstract_event_validator.dart';
+import 'package:evoleen_fhir_events/src/errors.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
+import 'package:evoleen_fhir_events/src/validators/abstract_event_validator.dart';
 
 class PoisonEventValidator implements EventValidatorAbstract {
   late final int _dequeueCount;

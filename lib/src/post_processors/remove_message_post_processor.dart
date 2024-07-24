@@ -1,6 +1,6 @@
-import '../fhir_event_processor/abstract_post_processor.dart';
-import '../fhir_message_client/abstract_fhir_message_client.dart';
-import '../fhir_message_client/models/fhir_message.dart';
+import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_post_processor.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
 
 class RemoveMessagePostProcessor implements PostProcessorAbstract {
   @override

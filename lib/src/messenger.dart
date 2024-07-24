@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'abstract_messenger.dart';
-import 'fhir_event_processor/abstract_action_executor.dart';
-import 'fhir_event_processor/abstract_fhir_event_processor.dart';
-import 'fhir_event_processor/abstract_post_processor.dart';
-import 'fhir_event_processor/azure_event_processor.dart';
-import 'fhir_message_client/abstract_fhir_message_client.dart';
-import 'fhir_message_client/azure_message_client.dart';
-import 'validators/abstract_event_validator.dart';
+import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_action_executor.dart';
+import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_fhir_event_processor.dart';
+import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_post_processor.dart';
+import 'package:evoleen_fhir_events/src/fhir_event_processor/azure_event_processor.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/azure_message_client.dart';
+import 'package:evoleen_fhir_events/src/validators/abstract_event_validator.dart';
 
 class Messanger implements MessangerAbstract {
   final FhirEventProcessorAbstract _eventProcessor;

@@ -1,5 +1,5 @@
-import '../fhir_message_client/abstract_fhir_message_client.dart';
-import '../fhir_message_client/models/fhir_event.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_event.dart';
 
 abstract class ActionExecutorAbstract {
   FhirEventType get type;

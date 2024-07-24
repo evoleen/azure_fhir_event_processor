@@ -1,5 +1,5 @@
 import 'package:azstore/azstore.dart';
-import 'fhir_event.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_event.dart';
 
 class FhirMessage {
   final String id;

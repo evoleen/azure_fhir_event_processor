@@ -1,4 +1,4 @@
-import 'models/fhir_message.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
 
 abstract class FhirMessageClientAbstract {
   Future<List<FhirMessage>> consumeMessages({required int messagesCount});

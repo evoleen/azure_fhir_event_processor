@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'fhir_event_body.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_event_body.dart';
 
 class FhirEvent {
   final String id;

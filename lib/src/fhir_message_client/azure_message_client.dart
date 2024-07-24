@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:azstore/azstore.dart';
-import 'abstract_fhir_message_client.dart';
-import 'models/fhir_message.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
+import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
 
 class AzureMessageClient implements FhirMessageClientAbstract {
   late AzureStorage _storage;
@@ -25,11 +25,13 @@ class AzureMessageClient implements FhirMessageClientAbstract {
   }
 
   @override
-  Future<void> sanitizeMessage({required FhirMessage fhirPoisonedMessage}) async {
+  Future<void> sanitizeMessage(
+      {required FhirMessage fhirPoisonedMessage}) async {
     String message = _serializeToFhirMessage(fhirPoisonedMessage);
 
     // Send message to poison queue
-    await _storage.putQMessage(qName: _poisonQueueName, message: message, messagettl: -1);
+    await _storage.putQMessage(
+        qName: _poisonQueueName, message: message, messagettl: -1);
     // Remove message from current queue
     await removeMessage(fhirMessage: fhirPoisonedMessage);
   }
