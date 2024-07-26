@@ -147,6 +147,18 @@ class MockDeleteActionExecutor extends _i1.Mock
   }
 
   @override
+  List<_i2.FhirEventType> get eventTypes => (super.noSuchMethod(
+        Invocation.getter(#eventTypes),
+        returnValue: <_i2.FhirEventType>[],
+      ) as List<_i2.FhirEventType>);
+
+  @override
+  List<String> get resourceTypes => (super.noSuchMethod(
+        Invocation.getter(#resourceTypes),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
   _i3.Future<void> execute({required _i2.FhirEvent? fhirEvent}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -169,6 +181,18 @@ class MockUpdateActionExecutor extends _i1.Mock
   }
 
   @override
+  List<_i2.FhirEventType> get eventTypes => (super.noSuchMethod(
+        Invocation.getter(#eventTypes),
+        returnValue: <_i2.FhirEventType>[],
+      ) as List<_i2.FhirEventType>);
+
+  @override
+  List<String> get resourceTypes => (super.noSuchMethod(
+        Invocation.getter(#resourceTypes),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
   _i3.Future<void> execute({required _i2.FhirEvent? fhirEvent}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -189,6 +213,18 @@ class MockCreateActionExecutor extends _i1.Mock
   MockCreateActionExecutor() {
     _i1.throwOnMissingStub(this);
   }
+
+  @override
+  List<_i2.FhirEventType> get eventTypes => (super.noSuchMethod(
+        Invocation.getter(#eventTypes),
+        returnValue: <_i2.FhirEventType>[],
+      ) as List<_i2.FhirEventType>);
+
+  @override
+  List<String> get resourceTypes => (super.noSuchMethod(
+        Invocation.getter(#resourceTypes),
+        returnValue: <String>[],
+      ) as List<String>);
 
   @override
   _i3.Future<void> execute({required _i2.FhirEvent? fhirEvent}) =>

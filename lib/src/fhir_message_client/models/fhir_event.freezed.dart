@@ -24,7 +24,7 @@ mixin _$FhirEvent {
   String get topic => throw _privateConstructorUsedError;
   String get subject => throw _privateConstructorUsedError;
   FhirEventData get data => throw _privateConstructorUsedError;
-  String get eventType => throw _privateConstructorUsedError;
+  FhirEventType get eventType => throw _privateConstructorUsedError;
   String get dataVersion => throw _privateConstructorUsedError;
   String get metadataVersion => throw _privateConstructorUsedError;
   String get eventTime => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $FhirEventCopyWith<$Res> {
       String topic,
       String subject,
       FhirEventData data,
-      String eventType,
+      FhirEventType eventType,
       String dataVersion,
       String metadataVersion,
       String eventTime});
@@ -101,7 +101,7 @@ class _$FhirEventCopyWithImpl<$Res, $Val extends FhirEvent>
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as FhirEventType,
       dataVersion: null == dataVersion
           ? _value.dataVersion
           : dataVersion // ignore: cast_nullable_to_non_nullable
@@ -141,7 +141,7 @@ abstract class _$$FhirEventImplCopyWith<$Res>
       String topic,
       String subject,
       FhirEventData data,
-      String eventType,
+      FhirEventType eventType,
       String dataVersion,
       String metadataVersion,
       String eventTime});
@@ -192,7 +192,7 @@ class __$$FhirEventImplCopyWithImpl<$Res>
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as FhirEventType,
       dataVersion: null == dataVersion
           ? _value.dataVersion
           : dataVersion // ignore: cast_nullable_to_non_nullable
@@ -234,7 +234,7 @@ class _$FhirEventImpl implements _FhirEvent {
   @override
   final FhirEventData data;
   @override
-  final String eventType;
+  final FhirEventType eventType;
   @override
   final String dataVersion;
   @override
@@ -293,7 +293,7 @@ abstract class _FhirEvent implements FhirEvent {
       required final String topic,
       required final String subject,
       required final FhirEventData data,
-      required final String eventType,
+      required final FhirEventType eventType,
       required final String dataVersion,
       required final String metadataVersion,
       required final String eventTime}) = _$FhirEventImpl;
@@ -310,7 +310,7 @@ abstract class _FhirEvent implements FhirEvent {
   @override
   FhirEventData get data;
   @override
-  String get eventType;
+  FhirEventType get eventType;
   @override
   String get dataVersion;
   @override

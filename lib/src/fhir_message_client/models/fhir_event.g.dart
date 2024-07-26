@@ -12,7 +12,7 @@ _$FhirEventImpl _$$FhirEventImplFromJson(Map<String, dynamic> json) =>
       topic: json['topic'] as String,
       subject: json['subject'] as String,
       data: FhirEventData.fromJson(json['data'] as Map<String, dynamic>),
-      eventType: json['eventType'] as String,
+      eventType: $enumDecode(_$FhirEventTypeEnumMap, json['eventType']),
       dataVersion: json['dataVersion'] as String,
       metadataVersion: json['metadataVersion'] as String,
       eventTime: json['eventTime'] as String,
@@ -24,8 +24,14 @@ Map<String, dynamic> _$$FhirEventImplToJson(_$FhirEventImpl instance) =>
       'topic': instance.topic,
       'subject': instance.subject,
       'data': instance.data.toJson(),
-      'eventType': instance.eventType,
+      'eventType': _$FhirEventTypeEnumMap[instance.eventType]!,
       'dataVersion': instance.dataVersion,
       'metadataVersion': instance.metadataVersion,
       'eventTime': instance.eventTime,
     };
+
+const _$FhirEventTypeEnumMap = {
+  FhirEventType.resourceDeleted: 'Microsoft.HealthcareApis.FhirResourceDeleted',
+  FhirEventType.resourceCreated: 'Microsoft.HealthcareApis.FhirResourceCreated',
+  FhirEventType.resourceUpdated: 'Microsoft.HealthcareApis.FhirResourceUpdated',
+};

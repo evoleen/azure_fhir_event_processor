@@ -48,11 +48,23 @@ class ValidatorFail implements AbstractEventValidator {
 class DeleteActionExecutor implements AbstractActionExecutor {
   @override
   Future<void> execute({required FhirEvent fhirEvent}) async {}
+
+  @override
+  List<FhirEventType> get eventTypes => throw UnimplementedError();
+
+  @override
+  List<String> get resourceTypes => throw UnimplementedError();
 }
 
 class UpdateActionExecutor implements AbstractActionExecutor {
   @override
   Future<void> execute({required FhirEvent fhirEvent}) async {}
+
+  @override
+  List<FhirEventType> get eventTypes => throw UnimplementedError();
+
+  @override
+  List<String> get resourceTypes => throw UnimplementedError();
 }
 
 class CreateActionExecutor implements AbstractActionExecutor {
@@ -60,6 +72,12 @@ class CreateActionExecutor implements AbstractActionExecutor {
   Future<void> execute({required FhirEvent fhirEvent}) {
     return Future<void>.value();
   }
+
+  @override
+  List<FhirEventType> get eventTypes => throw UnimplementedError();
+
+  @override
+  List<String> get resourceTypes => throw UnimplementedError();
 }
 
 class TmpPostProcessor implements AbstractPostProcessor {
@@ -72,7 +90,7 @@ class TmpPostProcessor implements AbstractPostProcessor {
   }
 }
 
-FhirMessage getFhirMessageMock({required fhirEventType}) {
+FhirMessage getFhirMessageMock({required FhirEventType fhirEventType}) {
   final FhirEventData fhirEventData = FhirEventData(
     resourceFhirId: "9f4e6650-e585-4b33-9aff-f6049b7f7b94",
     resourceType: "Patient",

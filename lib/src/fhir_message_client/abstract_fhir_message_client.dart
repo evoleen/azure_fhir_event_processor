@@ -1,4 +1,5 @@
 import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 abstract class AbstractFhirMessageClient {
   Future<List<FhirMessage>> consumeMessages({required int messagesCount});
@@ -8,11 +9,10 @@ abstract class AbstractFhirMessageClient {
 }
 
 enum FhirEventType {
-  resourceDeleted("Microsoft.HealthcareApis.FhirResourceDeleted"),
-  resourceCreated("Microsoft.HealthcareApis.FhirResourceCreated"),
-  resourceUpdated("Microsoft.HealthcareApis.FhirResourceUpdated");
-
-  final String name;
-
-  const FhirEventType(this.name);
+  @JsonValue("Microsoft.HealthcareApis.FhirResourceDeleted")
+  resourceDeleted,
+  @JsonValue("Microsoft.HealthcareApis.FhirResourceCreated")
+  resourceCreated,
+  @JsonValue("Microsoft.HealthcareApis.FhirResourceUpdated")
+  resourceUpdated;
 }

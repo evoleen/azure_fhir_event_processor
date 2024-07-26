@@ -17,10 +17,10 @@ void main() {
   late MockAzureMessageClient mockAzureMessageClient;
   late AzureEventProcessor azureEventProcessor;
   final FhirMessage fhirMessage = getFhirMessageMock(
-    fhirEventType: "Microsoft.HealthcareApis.FhirResourceDeleted",
+    fhirEventType: FhirEventType.resourceDeleted,
   );
   final FhirMessage fhirMessageCreate = getFhirMessageMock(
-    fhirEventType: "Microsoft.HealthcareApis.FhirResourceCreated",
+    fhirEventType: FhirEventType.resourceCreated,
   );
 
   group('Test Azure event processor', () {
@@ -93,8 +93,9 @@ void main() {
       );
 
       final mockDeleteActionExecutor = MockDeleteActionExecutor();
-      //when(mockDeleteActionExecutor.type)
-      //    .thenReturn(FhirEventType.resourceDeleted);
+      when(mockDeleteActionExecutor.eventTypes)
+          .thenReturn([FhirEventType.resourceDeleted]);
+      when(mockDeleteActionExecutor.resourceTypes).thenReturn(['*']);
       when(mockDeleteActionExecutor.execute(fhirEvent: fhirMessage.fhirEvent))
           .thenAnswer((realInvocation) async {});
 
@@ -117,8 +118,9 @@ void main() {
       );
 
       final mockCreateActionExecutor = MockCreateActionExecutor();
-      //when(mockCreateActionExecutor.type)
-      //    .thenReturn(FhirEventType.resourceCreated);
+      when(mockCreateActionExecutor.eventTypes)
+          .thenReturn([FhirEventType.resourceCreated]);
+      when(mockCreateActionExecutor.resourceTypes).thenReturn(['*']);
       when(mockCreateActionExecutor.execute(
               fhirEvent: fhirMessageCreate.fhirEvent))
           .thenAnswer((realInvocation) async {});

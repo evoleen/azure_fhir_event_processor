@@ -11,7 +11,7 @@ class FhirEvent with _$FhirEvent {
     required String topic,
     required String subject,
     required FhirEventData data,
-    required String eventType,
+    required FhirEventType eventType,
     required String dataVersion,
     required String metadataVersion,
     required String eventTime,

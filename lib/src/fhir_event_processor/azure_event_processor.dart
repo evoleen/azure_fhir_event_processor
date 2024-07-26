@@ -63,7 +63,17 @@ class AzureEventProcessor implements AbstractFhirEventProcessor {
 
   Future<void> _executeActions(FhirMessage fhirMessage) async {
     for (final executor in _actionExecutors) {
-      await executor.execute(fhirEvent: fhirMessage.fhirEvent);
+      // check if executor listens for this particular message type (create/update/delete)
+      if (executor.eventTypes.contains(fhirMessage.fhirEvent.eventType)) {
+        // check if executor listens to this particular entity
+        if (executor.resourceTypes.isEmpty ||
+            executor.resourceTypes.first == '*' ||
+            executor.resourceTypes
+                .contains(fhirMessage.fhirEvent.data.resourceType)) {
+          // executor matches, run it
+          await executor.execute(fhirEvent: fhirMessage.fhirEvent);
+        }
+      }
     }
   }
 
