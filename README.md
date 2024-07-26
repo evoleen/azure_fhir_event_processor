@@ -1,17 +1,9 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Azure FHIR Event Processor
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+A small base package to help implementing queue workers for FHIR events.
+- Can subscribe to Azure Storage Queues
+- Deserializes event data from Event Grid format
+- Support for message validators (for example to automatically drop queue items that have been processed too often)
+- Support for post-message hooks
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-
-## Links
-
-- https://azure.microsoft.com/de-de/blog/managing-concurrency-in-microsoft-azure-storage-2
+The goal of the package is to simplify the creation of Dart workers that subscribe to FHIR event queues.
