@@ -1,4 +1,4 @@
-import 'package:evoleen_fhir_events/evoleen_fhir_events.dart';
+import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
 
 class TmpValidator implements AbstractEventValidator {
   @override
@@ -47,16 +47,10 @@ class ValidatorFail implements AbstractEventValidator {
 
 class DeleteActionExecutor implements AbstractActionExecutor {
   @override
-  FhirEventType get type => FhirEventType.resourceDeleted;
-
-  @override
   Future<void> execute({required FhirEvent fhirEvent}) async {}
 }
 
 class UpdateActionExecutor implements AbstractActionExecutor {
-  @override
-  FhirEventType get type => FhirEventType.resourceUpdated;
-
   @override
   Future<void> execute({required FhirEvent fhirEvent}) async {}
 }
@@ -66,9 +60,6 @@ class CreateActionExecutor implements AbstractActionExecutor {
   Future<void> execute({required FhirEvent fhirEvent}) {
     return Future<void>.value();
   }
-
-  @override
-  FhirEventType get type => FhirEventType.resourceCreated;
 }
 
 class TmpPostProcessor implements AbstractPostProcessor {

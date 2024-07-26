@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_event_body.dart';
+import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
 
 part 'fhir_event.freezed.dart';
 part 'fhir_event.g.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:azstore/azstore.dart';
-import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_event.dart';
+import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'fhir_message.freezed.dart';

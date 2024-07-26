@@ -1,4 +1,4 @@
-import 'package:evoleen_fhir_events/evoleen_fhir_events.dart';
+import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -26,7 +26,8 @@ void main() {
   group('Test Azure event processor', () {
     setUp(() {
       mockAzureMessageClient = MockAzureMessageClient();
-      azureEventProcessor = AzureEventProcessor(messageClient: mockAzureMessageClient);
+      azureEventProcessor =
+          AzureEventProcessor(messageClient: mockAzureMessageClient);
     });
 
     test('it can use validators and pass', () async {
@@ -77,7 +78,8 @@ void main() {
 
       await azureEventProcessor.processOne();
       verifyNever(tmpValidator.validate(fhirMessage: fhirMessage));
-      verifyNever(tmpValidator.handleException(fhirMessage: fhirMessage, messageClient: mockAzureMessageClient));
+      verifyNever(tmpValidator.handleException(
+          fhirMessage: fhirMessage, messageClient: mockAzureMessageClient));
     });
 
     test('it can use action executor for delete event type', () async {
@@ -91,13 +93,16 @@ void main() {
       );
 
       final mockDeleteActionExecutor = MockDeleteActionExecutor();
-      when(mockDeleteActionExecutor.type).thenReturn(FhirEventType.resourceDeleted);
-      when(mockDeleteActionExecutor.execute(fhirEvent: fhirMessage.fhirEvent)).thenAnswer((realInvocation) async {});
+      //when(mockDeleteActionExecutor.type)
+      //    .thenReturn(FhirEventType.resourceDeleted);
+      when(mockDeleteActionExecutor.execute(fhirEvent: fhirMessage.fhirEvent))
+          .thenAnswer((realInvocation) async {});
 
       azureEventProcessor.addActionExecutor(mockDeleteActionExecutor);
       await azureEventProcessor.processOne();
 
-      verify(mockDeleteActionExecutor.execute(fhirEvent: fhirMessage.fhirEvent)).called(1);
+      verify(mockDeleteActionExecutor.execute(fhirEvent: fhirMessage.fhirEvent))
+          .called(1);
     });
 
     test('it can use action executor for create event type', () async {
@@ -112,14 +117,18 @@ void main() {
       );
 
       final mockCreateActionExecutor = MockCreateActionExecutor();
-      when(mockCreateActionExecutor.type).thenReturn(FhirEventType.resourceCreated);
-      when(mockCreateActionExecutor.execute(fhirEvent: fhirMessageCreate.fhirEvent))
+      //when(mockCreateActionExecutor.type)
+      //    .thenReturn(FhirEventType.resourceCreated);
+      when(mockCreateActionExecutor.execute(
+              fhirEvent: fhirMessageCreate.fhirEvent))
           .thenAnswer((realInvocation) async {});
 
       azureEventProcessor.addActionExecutor(mockCreateActionExecutor);
       await azureEventProcessor.processOne();
 
-      verify(mockCreateActionExecutor.execute(fhirEvent: fhirMessageCreate.fhirEvent)).called(1);
+      verify(mockCreateActionExecutor.execute(
+              fhirEvent: fhirMessageCreate.fhirEvent))
+          .called(1);
     });
 
     test('it can use post processors', () async {
@@ -133,13 +142,16 @@ void main() {
       );
 
       final tmpPostProcessor = MockTmpPostProcessor();
-      when(tmpPostProcessor.apply(fhirMessage: fhirMessage, messageClient: mockAzureMessageClient))
+      when(tmpPostProcessor.apply(
+              fhirMessage: fhirMessage, messageClient: mockAzureMessageClient))
           .thenAnswer((realInvocation) async {});
       azureEventProcessor.addPostProcessor(tmpPostProcessor);
 
       await azureEventProcessor.processOne();
 
-      verify(tmpPostProcessor.apply(fhirMessage: fhirMessage, messageClient: mockAzureMessageClient)).called(1);
+      verify(tmpPostProcessor.apply(
+              fhirMessage: fhirMessage, messageClient: mockAzureMessageClient))
+          .called(1);
     });
   });
 }

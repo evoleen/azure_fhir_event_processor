@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:azstore/azstore.dart';
-import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
-import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
+import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
 
 class AzureMessageClient implements AbstractFhirMessageClient {
   late AzureStorage _storage;

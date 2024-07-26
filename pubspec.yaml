@@ -1,7 +1,7 @@
-name: evoleen_fhir_events
+name: azure_fhir_event_processor
 description: Package to work with FHIR messages in the Azure storage queue
-version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+version: 0.0.1
+repository: https://github.com/evoleen/azure_fhir_event_processor
 
 environment:
   sdk: ^3.2.6

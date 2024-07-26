@@ -1,7 +1,4 @@
-import 'package:evoleen_fhir_events/src/errors.dart';
-import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
-import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
-import 'package:evoleen_fhir_events/src/validators/abstract_event_validator.dart';
+import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
 
 class PoisonEventValidator implements AbstractEventValidator {
   late final int _dequeueCount;

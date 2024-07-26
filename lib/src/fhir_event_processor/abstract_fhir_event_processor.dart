@@ -1,6 +1,6 @@
-import 'package:evoleen_fhir_events/src/validators/abstract_event_validator.dart';
-import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_action_executor.dart';
-import 'package:evoleen_fhir_events/src/fhir_event_processor/abstract_post_processor.dart';
+import 'package:azure_fhir_event_processor/src/validators/abstract_event_validator.dart';
+import 'package:azure_fhir_event_processor/src/fhir_event_processor/abstract_action_executor.dart';
+import 'package:azure_fhir_event_processor/src/fhir_event_processor/abstract_post_processor.dart';
 
 abstract class AbstractFhirEventProcessor {
   Future<void> processOne();

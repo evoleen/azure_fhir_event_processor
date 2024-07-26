@@ -1,5 +1,4 @@
-import 'package:evoleen_fhir_events/src/fhir_message_client/abstract_fhir_message_client.dart';
-import 'package:evoleen_fhir_events/src/fhir_message_client/models/fhir_message.dart';
+import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
 
 abstract class AbstractPostProcessor {
   Future<void> apply({
