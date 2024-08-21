@@ -18,7 +18,7 @@ class AzureMessageClient implements AbstractFhirMessageClient {
   }) {
     _connectionString = connectionString;
     _queueName = queueName;
-    _poisonQueueName = poisonQueueName ?? "poison-messages";
+    _poisonQueueName = poisonQueueName ?? "poisoned-messages";
     _msgVisibilityTimeout = messageVisibilityTimeout ?? 30;
     _storage = azureStorage ?? AzureStorage.parse(_connectionString);
   }

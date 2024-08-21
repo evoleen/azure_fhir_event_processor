@@ -9,6 +9,7 @@ class Messenger implements MessengerAbstract {
   factory Messenger.setupWithAzure({
     required String connectionString,
     required queueName,
+    String? poisonQueueName,
     required List<AbstractEventValidator> eventValidators,
     required List<AbstractActionExecutor> actionExecutors,
     List<AbstractPostProcessor>? postProcessors,
@@ -17,6 +18,7 @@ class Messenger implements MessengerAbstract {
     AbstractFhirMessageClient messageClient = AzureMessageClient(
       connectionString: connectionString,
       queueName: queueName,
+      poisonQueueName: poisonQueueName,
       messageVisibilityTimeout: messageVisibilityTimeout,
     );
 
