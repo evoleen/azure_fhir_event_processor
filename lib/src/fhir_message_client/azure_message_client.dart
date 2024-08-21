@@ -8,17 +8,20 @@ class AzureMessageClient implements AbstractFhirMessageClient {
   late String _queueName;
   late String _poisonQueueName;
   int? _msgVisibilityTimeout;
+  late int _poisonedMessageTtl;
 
   AzureMessageClient({
     required connectionString,
     required String queueName,
     String? poisonQueueName,
     int? messageVisibilityTimeout,
+    int? poisonedMessageTtl,
     AzureStorage? azureStorage,
   }) {
     _connectionString = connectionString;
     _queueName = queueName;
     _poisonQueueName = poisonQueueName ?? "poisoned-messages";
+    _poisonedMessageTtl = poisonedMessageTtl ?? -1;
     _msgVisibilityTimeout = messageVisibilityTimeout ?? 30;
     _storage = azureStorage ?? AzureStorage.parse(_connectionString);
   }
@@ -30,7 +33,9 @@ class AzureMessageClient implements AbstractFhirMessageClient {
 
     // Send message to poison queue
     await _storage.putQMessage(
-        qName: _poisonQueueName, message: message, messagettl: -1);
+        qName: _poisonQueueName,
+        message: message,
+        messagettl: _poisonedMessageTtl);
     // Remove message from current queue
     await removeMessage(fhirMessage: fhirPoisonedMessage);
   }

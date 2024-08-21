@@ -10,6 +10,7 @@ class Messenger implements MessengerAbstract {
     required String connectionString,
     required queueName,
     String? poisonQueueName,
+    int? poisonedMessageTtl,
     required List<AbstractEventValidator> eventValidators,
     required List<AbstractActionExecutor> actionExecutors,
     List<AbstractPostProcessor>? postProcessors,
@@ -19,6 +20,7 @@ class Messenger implements MessengerAbstract {
       connectionString: connectionString,
       queueName: queueName,
       poisonQueueName: poisonQueueName,
+      poisonedMessageTtl: poisonedMessageTtl,
       messageVisibilityTimeout: messageVisibilityTimeout,
     );
 
