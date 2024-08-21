@@ -22,6 +22,6 @@ class PoisonEventValidator implements AbstractEventValidator {
   }) async {
     await messageClient.sanitizeMessage(fhirPoisonedMessage: fhirMessage);
 
-    return HandlerResult();
+    return HandlerResult(hasToRethrow: false);
   }
 }
