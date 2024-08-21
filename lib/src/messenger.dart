@@ -41,7 +41,7 @@ class Messenger implements MessengerAbstract {
 
   @override
   Future<void> listen(
-      {required Function(Object e) processExceptionHandler,
+      {required Function(Object e, StackTrace? st) processExceptionHandler,
       Duration? sleepDuration}) async {
     final finalSleepDuration = sleepDuration ?? Duration(seconds: 20);
 
@@ -53,8 +53,8 @@ class Messenger implements MessengerAbstract {
         if (shouldSleep) {
           sleep(finalSleepDuration);
         }
-      } catch (e) {
-        processExceptionHandler(e);
+      } catch (e, st) {
+        processExceptionHandler(e, st);
       }
     }
   }

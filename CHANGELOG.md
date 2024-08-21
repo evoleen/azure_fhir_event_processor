@@ -1,3 +1,7 @@
+## 0.0.5
+
+- Enable passing a stack trace through the exception handler
+
 ## 0.0.4
 
 - Prevent poison validator from accidentally requeuing a poisoned message

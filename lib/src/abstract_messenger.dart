@@ -1,5 +1,5 @@
 abstract class MessengerAbstract {
   Future<void> listen(
-      {required Function(Object e) processExceptionHandler,
+      {required Function(Object e, StackTrace? st) processExceptionHandler,
       Duration? sleepDuration});
 }
