@@ -1,6 +1,6 @@
 name: azure_fhir_event_processor
-description: Package to work with FHIR messages in the Azure storage queue
-version: 0.0.5
+description: Process FHIR events emitted by Azure Health Data Services using Dart queue workers.
+version: 1.0.0
 repository: https://github.com/evoleen/azure_fhir_event_processor
 
 environment:
@@ -8,14 +8,14 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  azstore: 1.0.3
+  azstore: ^1.0.3
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
 
 dev_dependencies:
   lints: ^4.0.0
   test: ^1.24.0
-  mockito: 5.4.4
+  mockito: ^5.4.4
   build_runner: ^2.4.11
   freezed: ^2.5.7
   json_serializable: ^6.8.0
