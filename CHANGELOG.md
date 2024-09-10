@@ -1,3 +1,7 @@
+## 1.0.0
+
+- First public version
+
 ## 0.0.5
 
 - Enable passing a stack trace through the exception handler
