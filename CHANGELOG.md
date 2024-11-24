@@ -1,3 +1,7 @@
+## 1.0.1
+
+- Work around bug in azstore package sending incorrect URLs
+
 ## 1.0.0
 
 - First public version

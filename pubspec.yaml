@@ -1,7 +1,7 @@
 name: azure_fhir_event_processor
 description: Process FHIR events emitted by Azure Health Data Services using
   Dart queue workers.
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/evoleen/azure_fhir_event_processor
 
 environment:

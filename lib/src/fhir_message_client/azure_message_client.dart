@@ -54,8 +54,8 @@ class AzureMessageClient implements AbstractFhirMessageClient {
   Future<void> removeMessage({required FhirMessage fhirMessage}) async {
     await _storage.delQmessage(
       qName: _queueName,
-      messageId: fhirMessage.id,
-      popReceipt: fhirMessage.popReceipt,
+      messageId: Uri.encodeComponent(fhirMessage.id),
+      popReceipt: Uri.encodeComponent(fhirMessage.popReceipt),
     );
   }
 
