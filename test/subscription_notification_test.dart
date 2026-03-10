@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('Subscription notification format (Fire Arrow MESSAGE channel)', () {
-    test('FhirEvent.fromSubscriptionJson parses notification JSON', () {
+    test('HapiFhirEvent.fromSubscriptionJson parses notification JSON', () {
       const jsonStr = '''
         {
           "notificationId": "550e8400-e29b-41d4-a716-446655440000",
@@ -21,7 +21,7 @@ void main() {
         }
       ''';
       final json = jsonDecode(jsonStr) as Map<String, Object?>;
-      final event = FhirEvent.fromSubscriptionJson(json);
+      final event = HapiFhirEvent.fromSubscriptionJson(json);
 
       expect(event.id, '550e8400-e29b-41d4-a716-446655440000');
       expect(event.eventType, FhirEventType.resourceCreated);
@@ -31,10 +31,9 @@ void main() {
       expect(event.subscriptionId, 'Subscription/123');
       expect(event.subscriptionTimestamp, '2024-01-15T10:30:00Z');
       expect(event.criteria, 'Patient?');
-      expect(event.data, isNull);
     });
 
-    test('FhirEvent.fromJson auto-detects subscription format', () {
+    test('parseFhirEvent auto-detects subscription format', () {
       const jsonStr = '''
         {
           "notificationId": "660e8400-e29b-41d4-a716-446655440001",
@@ -45,7 +44,7 @@ void main() {
         }
       ''';
       final json = jsonDecode(jsonStr) as Map<String, Object?>;
-      final event = FhirEvent.fromJson(json);
+      final event = FhirEvent.parseFhirEvent(json);
 
       expect(event.eventType, FhirEventType.resourceUpdated);
       expect(event.resourceType, 'Observation');
@@ -61,11 +60,11 @@ void main() {
         'resourceId': 'Patient/1',
         'timestamp': 1710000000000.0, // server may send number
       };
-      final event = FhirEvent.fromSubscriptionJson(json);
+      final event = HapiFhirEvent.fromSubscriptionJson(json);
       expect(event.subscriptionTimestamp, '1710000000000.0');
     });
 
-    test('SubscriptionNotificationFhirMessageParser produces FhirMessage', () {
+    test('HapiSubscriptionNotificationMessageParser produces FhirMessage', () {
       const body = '''
         {
           "notificationId": "a1b2c3",
@@ -82,7 +81,7 @@ void main() {
         expirationTime: '2024-01-02T00:00:00Z',
         dequeueCount: 0,
       );
-      final parser = SubscriptionNotificationFhirMessageParser();
+      final parser = HapiSubscriptionNotificationMessageParser();
       final message = parser.parse(body, metadata);
 
       expect(message.id, 'msg-1');
@@ -105,7 +104,7 @@ void main() {
         'payload': patientPayload,
         'payloadContentType': 'application/fhir+json',
       };
-      final event = FhirEvent.fromSubscriptionJson(json);
+      final event = HapiFhirEvent.fromSubscriptionJson(json);
 
       expect(event.payload, isNotNull);
       expect(event.payloadContentType, 'application/fhir+json');
@@ -126,8 +125,8 @@ void main() {
           "resourceId": "Patient/1"
         }
       ''';
-      final event =
-          FhirEvent.fromSubscriptionJson(jsonDecode(jsonStr) as Map<String, Object?>);
+      final event = HapiFhirEvent.fromSubscriptionJson(
+          jsonDecode(jsonStr) as Map<String, Object?>);
       expect(event.payload, isNull);
       expect(event.payloadResource, isNull);
     });
@@ -144,8 +143,8 @@ void main() {
           "payloadContentType": "application/fhir+xml"
         }
       ''';
-      final event =
-          FhirEvent.fromSubscriptionJson(jsonDecode(jsonStr) as Map<String, Object?>);
+      final event = HapiFhirEvent.fromSubscriptionJson(
+          jsonDecode(jsonStr) as Map<String, Object?>);
       expect(event.payloadResource, isNull);
     });
   });

@@ -1,109 +1,57 @@
 import 'package:fhir_r4/fhir_r4.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../fhir_event_type.dart';
-import 'fhir_event_body.dart';
-import 'fhir_event_type_converter.dart';
+import 'ahds/ahds_fhir_event.dart';
+import 'hapi/hapi_fhir_event.dart';
 
-part 'fhir_event.freezed.dart';
-part 'fhir_event.g.dart';
+/// Common base for FHIR subscription events from either AHDS (Event Grid)
+/// or HAPI (MESSAGE channel). Use [AhdsFhirEvent] or [HapiFhirEvent] for
+/// format-specific fields.
+abstract class FhirEvent {
+  const FhirEvent();
 
-@freezed
-abstract class FhirEvent with _$FhirEvent {
-  const FhirEvent._();
+  String get id;
+  FhirEventType get eventType;
 
-  const factory FhirEvent({
-    required String id,
-    @FhirEventTypeConverter() required FhirEventType eventType,
-    // CloudEvents (Azure Healthcare APIs) fields
-    String? topic,
-    String? subject,
-    FhirEventData? data,
-    String? dataVersion,
-    String? metadataVersion,
-    String? eventTime,
-    // Fire Arrow MESSAGE channel subscription fields
-    String? subscriptionId,
-    String? subscriptionTimestamp,
-    String? subscriptionResourceType,
-    String? subscriptionResourceId,
-    String? subscriptionResourceVersionId,
-    String? payload,
-    String? payloadContentType,
-    String? criteria,
-  }) = _FhirEvent;
+  /// Resource type (e.g. "Patient", "CarePlan").
+  String get resourceType;
 
-  /// Canonical resource type (from data or subscription payload).
-  String get resourceType =>
-      data?.resourceType ?? subscriptionResourceType ?? '';
+  /// Resource id (e.g. "Patient/123" or logical id).
+  String get resourceId;
 
-  /// Canonical resource id (from data.resourceFhirId or subscription resourceId).
-  String get resourceId => data?.resourceFhirId ?? subscriptionResourceId ?? '';
+  /// Resource version id as string, if available.
+  String? get resourceVersionId;
 
-  /// Canonical resource version id as string (from data or subscription).
-  String? get resourceVersionId => data != null
-      ? data!.resourceVersionId.toString()
-      : subscriptionResourceVersionId;
+  /// Parsed FHIR R4 resource from payload; only non-null for [HapiFhirEvent]
+  /// when the message includes full resource JSON.
+  Resource? get payloadResource => null;
 
-  /// Parsed FHIR R4 resource from [payload], when present and JSON.
-  /// Returns null if [payload] is null, content type is not JSON, or parsing fails.
-  /// Use [fhir_r4](https://pub.dev/packages/fhir_r4) types (e.g. `resource is Patient`) to work with the result.
-  Resource? get payloadResource {
-    final p = payload;
-    if (p == null || p.isEmpty) return null;
-    final ct = payloadContentType?.toLowerCase() ?? '';
-    if (ct != 'application/fhir+json' && ct != 'application/json') {
-      return null;
+  /// Serializes this event to JSON (AHDS or HAPI shape).
+  Map<String, dynamic> toJson();
+
+  /// Detects AHDS vs HAPI format and returns the matching subclass.
+  static FhirEvent parseFhirEvent(Map<String, Object?> json) {
+    if (json.containsKey('notificationId') &&
+        json.containsKey('subscriptionId')) {
+      return HapiFhirEvent.fromSubscriptionJson(json);
     }
-    try {
-      return Resource.fromJsonString(p);
-    } catch (_) {
-      return null;
-    }
+    return AhdsFhirEvent.fromJson(json);
   }
+}
 
-  /// Serializes this event to JSON (implementation in generated code).
-  Map<String, dynamic> toJson() => _$FhirEventToJson(this as _FhirEvent);
+/// Used by [FhirMessage] freezed copyWith; no-op copy for abstract [FhirEvent].
+abstract mixin class $FhirEventCopyWith<$Res> {
+  factory $FhirEventCopyWith(FhirEvent value, $Res Function(FhirEvent) then) =
+      _$FhirEventCopyWithImpl;
 
-  factory FhirEvent.fromJson(Map<String, Object?> json) {
-    if (_isSubscriptionFormat(json)) {
-      return FhirEvent.fromSubscriptionJson(json);
-    }
-    return FhirEvent.fromCloudEventsJson(json);
-  }
+  $Res call({String? id, FhirEventType? eventType});
+}
 
-  /// Parses Azure Healthcare APIs / Event Grid CloudEvents JSON only.
-  factory FhirEvent.fromCloudEventsJson(Map<String, Object?> json) =>
-      _$FhirEventFromJson(json);
+class _$FhirEventCopyWithImpl<$Res> implements $FhirEventCopyWith<$Res> {
+  _$FhirEventCopyWithImpl(this._value, this._then);
+  final FhirEvent _value;
+  final $Res Function(FhirEvent) _then;
 
-  static bool _isSubscriptionFormat(Map<String, Object?> json) =>
-      json.containsKey('notificationId') && json.containsKey('subscriptionId');
-
-  /// Parses Fire Arrow MESSAGE channel subscription notification format.
-  factory FhirEvent.fromSubscriptionJson(Map<String, Object?> json) {
-    final eventTypeRaw = json['eventType'];
-    final eventType = eventTypeRaw is String
-        ? const FhirEventTypeConverter().fromJson(eventTypeRaw)
-        : FhirEventType.resourceCreated;
-    return FhirEvent(
-      id: _stringFromJson(json['notificationId']) ?? '',
-      eventType: eventType,
-      subscriptionId: _stringFromJson(json['subscriptionId']),
-      subscriptionTimestamp: _stringFromJson(json['timestamp']),
-      subscriptionResourceType: _stringFromJson(json['resourceType']),
-      subscriptionResourceId: _stringFromJson(json['resourceId']),
-      subscriptionResourceVersionId: _stringFromJson(json['resourceVersionId']),
-      payload: _stringFromJson(json['payload']),
-      payloadContentType: _stringFromJson(json['payloadContentType']),
-      criteria: _stringFromJson(json['criteria']),
-    );
-  }
-
-  /// Coerces a JSON value to String? (handles String, num, etc.).
-  static String? _stringFromJson(Object? value) {
-    if (value == null) return null;
-    if (value is String) return value;
-    if (value is num) return value.toString();
-    return value.toString();
-  }
+  @override
+  $Res call({String? id, FhirEventType? eventType}) => _then(_value);
 }

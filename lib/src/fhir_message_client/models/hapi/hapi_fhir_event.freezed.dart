@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'fhir_event.dart';
+part of 'hapi_fhir_event.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,49 +14,44 @@ part of 'fhir_event.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$FhirEvent {
+mixin _$HapiFhirEvent {
+  @JsonKey(name: 'notificationId', defaultValue: '')
   String get id;
   @FhirEventTypeConverter()
-  FhirEventType get eventType; // CloudEvents (Azure Healthcare APIs) fields
-  String? get topic;
-  String? get subject;
-  FhirEventData? get data;
-  String? get dataVersion;
-  String? get metadataVersion;
-  String? get eventTime; // Fire Arrow MESSAGE channel subscription fields
+  FhirEventType get eventType;
   String? get subscriptionId;
+  @JsonKey(name: 'timestamp')
+  @_StringOrNumConverter()
   String? get subscriptionTimestamp;
+  @JsonKey(name: 'resourceType')
   String? get subscriptionResourceType;
+  @JsonKey(name: 'resourceId')
   String? get subscriptionResourceId;
+  @JsonKey(name: 'resourceVersionId')
   String? get subscriptionResourceVersionId;
   String? get payload;
   String? get payloadContentType;
   String? get criteria;
 
-  /// Create a copy of FhirEvent
+  /// Create a copy of HapiFhirEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $FhirEventCopyWith<FhirEvent> get copyWith =>
-      _$FhirEventCopyWithImpl<FhirEvent>(this as FhirEvent, _$identity);
+  $HapiFhirEventCopyWith<HapiFhirEvent> get copyWith =>
+      _$HapiFhirEventCopyWithImpl<HapiFhirEvent>(
+          this as HapiFhirEvent, _$identity);
+
+  /// Serializes this HapiFhirEvent to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is FhirEvent &&
+            other is HapiFhirEvent &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.eventType, eventType) ||
                 other.eventType == eventType) &&
-            (identical(other.topic, topic) || other.topic == topic) &&
-            (identical(other.subject, subject) || other.subject == subject) &&
-            (identical(other.data, data) || other.data == data) &&
-            (identical(other.dataVersion, dataVersion) ||
-                other.dataVersion == dataVersion) &&
-            (identical(other.metadataVersion, metadataVersion) ||
-                other.metadataVersion == metadataVersion) &&
-            (identical(other.eventTime, eventTime) ||
-                other.eventTime == eventTime) &&
             (identical(other.subscriptionId, subscriptionId) ||
                 other.subscriptionId == subscriptionId) &&
             (identical(other.subscriptionTimestamp, subscriptionTimestamp) ||
@@ -77,17 +72,12 @@ mixin _$FhirEvent {
                 other.criteria == criteria));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       id,
       eventType,
-      topic,
-      subject,
-      data,
-      dataVersion,
-      metadataVersion,
-      eventTime,
       subscriptionId,
       subscriptionTimestamp,
       subscriptionResourceType,
@@ -99,56 +89,46 @@ mixin _$FhirEvent {
 
   @override
   String toString() {
-    return 'FhirEvent(id: $id, eventType: $eventType, topic: $topic, subject: $subject, data: $data, dataVersion: $dataVersion, metadataVersion: $metadataVersion, eventTime: $eventTime, subscriptionId: $subscriptionId, subscriptionTimestamp: $subscriptionTimestamp, subscriptionResourceType: $subscriptionResourceType, subscriptionResourceId: $subscriptionResourceId, subscriptionResourceVersionId: $subscriptionResourceVersionId, payload: $payload, payloadContentType: $payloadContentType, criteria: $criteria)';
+    return 'HapiFhirEvent(id: $id, eventType: $eventType, subscriptionId: $subscriptionId, subscriptionTimestamp: $subscriptionTimestamp, subscriptionResourceType: $subscriptionResourceType, subscriptionResourceId: $subscriptionResourceId, subscriptionResourceVersionId: $subscriptionResourceVersionId, payload: $payload, payloadContentType: $payloadContentType, criteria: $criteria)';
   }
 }
 
 /// @nodoc
-abstract mixin class $FhirEventCopyWith<$Res> {
-  factory $FhirEventCopyWith(FhirEvent value, $Res Function(FhirEvent) _then) =
-      _$FhirEventCopyWithImpl;
+abstract mixin class $HapiFhirEventCopyWith<$Res> {
+  factory $HapiFhirEventCopyWith(
+          HapiFhirEvent value, $Res Function(HapiFhirEvent) _then) =
+      _$HapiFhirEventCopyWithImpl;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: 'notificationId', defaultValue: '') String id,
       @FhirEventTypeConverter() FhirEventType eventType,
-      String? topic,
-      String? subject,
-      FhirEventData? data,
-      String? dataVersion,
-      String? metadataVersion,
-      String? eventTime,
       String? subscriptionId,
+      @JsonKey(name: 'timestamp')
+      @_StringOrNumConverter()
       String? subscriptionTimestamp,
-      String? subscriptionResourceType,
-      String? subscriptionResourceId,
-      String? subscriptionResourceVersionId,
+      @JsonKey(name: 'resourceType') String? subscriptionResourceType,
+      @JsonKey(name: 'resourceId') String? subscriptionResourceId,
+      @JsonKey(name: 'resourceVersionId') String? subscriptionResourceVersionId,
       String? payload,
       String? payloadContentType,
       String? criteria});
-
-  $FhirEventDataCopyWith<$Res>? get data;
 }
 
 /// @nodoc
-class _$FhirEventCopyWithImpl<$Res> implements $FhirEventCopyWith<$Res> {
-  _$FhirEventCopyWithImpl(this._self, this._then);
+class _$HapiFhirEventCopyWithImpl<$Res>
+    implements $HapiFhirEventCopyWith<$Res> {
+  _$HapiFhirEventCopyWithImpl(this._self, this._then);
 
-  final FhirEvent _self;
-  final $Res Function(FhirEvent) _then;
+  final HapiFhirEvent _self;
+  final $Res Function(HapiFhirEvent) _then;
 
-  /// Create a copy of FhirEvent
+  /// Create a copy of HapiFhirEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? eventType = null,
-    Object? topic = freezed,
-    Object? subject = freezed,
-    Object? data = freezed,
-    Object? dataVersion = freezed,
-    Object? metadataVersion = freezed,
-    Object? eventTime = freezed,
     Object? subscriptionId = freezed,
     Object? subscriptionTimestamp = freezed,
     Object? subscriptionResourceType = freezed,
@@ -167,30 +147,6 @@ class _$FhirEventCopyWithImpl<$Res> implements $FhirEventCopyWith<$Res> {
           ? _self.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as FhirEventType,
-      topic: freezed == topic
-          ? _self.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subject: freezed == subject
-          ? _self.subject
-          : subject // ignore: cast_nullable_to_non_nullable
-              as String?,
-      data: freezed == data
-          ? _self.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as FhirEventData?,
-      dataVersion: freezed == dataVersion
-          ? _self.dataVersion
-          : dataVersion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      metadataVersion: freezed == metadataVersion
-          ? _self.metadataVersion
-          : metadataVersion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      eventTime: freezed == eventTime
-          ? _self.eventTime
-          : eventTime // ignore: cast_nullable_to_non_nullable
-              as String?,
       subscriptionId: freezed == subscriptionId
           ? _self.subscriptionId
           : subscriptionId // ignore: cast_nullable_to_non_nullable
@@ -225,72 +181,48 @@ class _$FhirEventCopyWithImpl<$Res> implements $FhirEventCopyWith<$Res> {
               as String?,
     ));
   }
-
-  /// Create a copy of FhirEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $FhirEventDataCopyWith<$Res>? get data {
-    if (_self.data == null) {
-      return null;
-    }
-
-    return $FhirEventDataCopyWith<$Res>(_self.data!, (value) {
-      return _then(_self.copyWith(data: value));
-    });
-  }
 }
 
 /// @nodoc
-
-class _FhirEvent extends FhirEvent {
-  const _FhirEvent(
-      {required this.id,
+@JsonSerializable()
+class _HapiFhirEvent extends HapiFhirEvent {
+  const _HapiFhirEvent(
+      {@JsonKey(name: 'notificationId', defaultValue: '') required this.id,
       @FhirEventTypeConverter() required this.eventType,
-      this.topic,
-      this.subject,
-      this.data,
-      this.dataVersion,
-      this.metadataVersion,
-      this.eventTime,
       this.subscriptionId,
+      @JsonKey(name: 'timestamp')
+      @_StringOrNumConverter()
       this.subscriptionTimestamp,
-      this.subscriptionResourceType,
-      this.subscriptionResourceId,
-      this.subscriptionResourceVersionId,
+      @JsonKey(name: 'resourceType') this.subscriptionResourceType,
+      @JsonKey(name: 'resourceId') this.subscriptionResourceId,
+      @JsonKey(name: 'resourceVersionId') this.subscriptionResourceVersionId,
       this.payload,
       this.payloadContentType,
       this.criteria})
       : super._();
+  factory _HapiFhirEvent.fromJson(Map<String, dynamic> json) =>
+      _$HapiFhirEventFromJson(json);
 
   @override
+  @JsonKey(name: 'notificationId', defaultValue: '')
   final String id;
   @override
   @FhirEventTypeConverter()
   final FhirEventType eventType;
-// CloudEvents (Azure Healthcare APIs) fields
-  @override
-  final String? topic;
-  @override
-  final String? subject;
-  @override
-  final FhirEventData? data;
-  @override
-  final String? dataVersion;
-  @override
-  final String? metadataVersion;
-  @override
-  final String? eventTime;
-// Fire Arrow MESSAGE channel subscription fields
   @override
   final String? subscriptionId;
   @override
+  @JsonKey(name: 'timestamp')
+  @_StringOrNumConverter()
   final String? subscriptionTimestamp;
   @override
+  @JsonKey(name: 'resourceType')
   final String? subscriptionResourceType;
   @override
+  @JsonKey(name: 'resourceId')
   final String? subscriptionResourceId;
   @override
+  @JsonKey(name: 'resourceVersionId')
   final String? subscriptionResourceVersionId;
   @override
   final String? payload;
@@ -299,31 +231,29 @@ class _FhirEvent extends FhirEvent {
   @override
   final String? criteria;
 
-  /// Create a copy of FhirEvent
+  /// Create a copy of HapiFhirEvent
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$FhirEventCopyWith<_FhirEvent> get copyWith =>
-      __$FhirEventCopyWithImpl<_FhirEvent>(this, _$identity);
+  _$HapiFhirEventCopyWith<_HapiFhirEvent> get copyWith =>
+      __$HapiFhirEventCopyWithImpl<_HapiFhirEvent>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$HapiFhirEventToJson(
+      this,
+    );
+  }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FhirEvent &&
+            other is _HapiFhirEvent &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.eventType, eventType) ||
                 other.eventType == eventType) &&
-            (identical(other.topic, topic) || other.topic == topic) &&
-            (identical(other.subject, subject) || other.subject == subject) &&
-            (identical(other.data, data) || other.data == data) &&
-            (identical(other.dataVersion, dataVersion) ||
-                other.dataVersion == dataVersion) &&
-            (identical(other.metadataVersion, metadataVersion) ||
-                other.metadataVersion == metadataVersion) &&
-            (identical(other.eventTime, eventTime) ||
-                other.eventTime == eventTime) &&
             (identical(other.subscriptionId, subscriptionId) ||
                 other.subscriptionId == subscriptionId) &&
             (identical(other.subscriptionTimestamp, subscriptionTimestamp) ||
@@ -344,17 +274,12 @@ class _FhirEvent extends FhirEvent {
                 other.criteria == criteria));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       id,
       eventType,
-      topic,
-      subject,
-      data,
-      dataVersion,
-      metadataVersion,
-      eventTime,
       subscriptionId,
       subscriptionTimestamp,
       subscriptionResourceType,
@@ -366,60 +291,48 @@ class _FhirEvent extends FhirEvent {
 
   @override
   String toString() {
-    return 'FhirEvent(id: $id, eventType: $eventType, topic: $topic, subject: $subject, data: $data, dataVersion: $dataVersion, metadataVersion: $metadataVersion, eventTime: $eventTime, subscriptionId: $subscriptionId, subscriptionTimestamp: $subscriptionTimestamp, subscriptionResourceType: $subscriptionResourceType, subscriptionResourceId: $subscriptionResourceId, subscriptionResourceVersionId: $subscriptionResourceVersionId, payload: $payload, payloadContentType: $payloadContentType, criteria: $criteria)';
+    return 'HapiFhirEvent(id: $id, eventType: $eventType, subscriptionId: $subscriptionId, subscriptionTimestamp: $subscriptionTimestamp, subscriptionResourceType: $subscriptionResourceType, subscriptionResourceId: $subscriptionResourceId, subscriptionResourceVersionId: $subscriptionResourceVersionId, payload: $payload, payloadContentType: $payloadContentType, criteria: $criteria)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$FhirEventCopyWith<$Res>
-    implements $FhirEventCopyWith<$Res> {
-  factory _$FhirEventCopyWith(
-          _FhirEvent value, $Res Function(_FhirEvent) _then) =
-      __$FhirEventCopyWithImpl;
+abstract mixin class _$HapiFhirEventCopyWith<$Res>
+    implements $HapiFhirEventCopyWith<$Res> {
+  factory _$HapiFhirEventCopyWith(
+          _HapiFhirEvent value, $Res Function(_HapiFhirEvent) _then) =
+      __$HapiFhirEventCopyWithImpl;
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: 'notificationId', defaultValue: '') String id,
       @FhirEventTypeConverter() FhirEventType eventType,
-      String? topic,
-      String? subject,
-      FhirEventData? data,
-      String? dataVersion,
-      String? metadataVersion,
-      String? eventTime,
       String? subscriptionId,
+      @JsonKey(name: 'timestamp')
+      @_StringOrNumConverter()
       String? subscriptionTimestamp,
-      String? subscriptionResourceType,
-      String? subscriptionResourceId,
-      String? subscriptionResourceVersionId,
+      @JsonKey(name: 'resourceType') String? subscriptionResourceType,
+      @JsonKey(name: 'resourceId') String? subscriptionResourceId,
+      @JsonKey(name: 'resourceVersionId') String? subscriptionResourceVersionId,
       String? payload,
       String? payloadContentType,
       String? criteria});
-
-  @override
-  $FhirEventDataCopyWith<$Res>? get data;
 }
 
 /// @nodoc
-class __$FhirEventCopyWithImpl<$Res> implements _$FhirEventCopyWith<$Res> {
-  __$FhirEventCopyWithImpl(this._self, this._then);
+class __$HapiFhirEventCopyWithImpl<$Res>
+    implements _$HapiFhirEventCopyWith<$Res> {
+  __$HapiFhirEventCopyWithImpl(this._self, this._then);
 
-  final _FhirEvent _self;
-  final $Res Function(_FhirEvent) _then;
+  final _HapiFhirEvent _self;
+  final $Res Function(_HapiFhirEvent) _then;
 
-  /// Create a copy of FhirEvent
+  /// Create a copy of HapiFhirEvent
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
     Object? eventType = null,
-    Object? topic = freezed,
-    Object? subject = freezed,
-    Object? data = freezed,
-    Object? dataVersion = freezed,
-    Object? metadataVersion = freezed,
-    Object? eventTime = freezed,
     Object? subscriptionId = freezed,
     Object? subscriptionTimestamp = freezed,
     Object? subscriptionResourceType = freezed,
@@ -429,7 +342,7 @@ class __$FhirEventCopyWithImpl<$Res> implements _$FhirEventCopyWith<$Res> {
     Object? payloadContentType = freezed,
     Object? criteria = freezed,
   }) {
-    return _then(_FhirEvent(
+    return _then(_HapiFhirEvent(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -438,30 +351,6 @@ class __$FhirEventCopyWithImpl<$Res> implements _$FhirEventCopyWith<$Res> {
           ? _self.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as FhirEventType,
-      topic: freezed == topic
-          ? _self.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subject: freezed == subject
-          ? _self.subject
-          : subject // ignore: cast_nullable_to_non_nullable
-              as String?,
-      data: freezed == data
-          ? _self.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as FhirEventData?,
-      dataVersion: freezed == dataVersion
-          ? _self.dataVersion
-          : dataVersion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      metadataVersion: freezed == metadataVersion
-          ? _self.metadataVersion
-          : metadataVersion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      eventTime: freezed == eventTime
-          ? _self.eventTime
-          : eventTime // ignore: cast_nullable_to_non_nullable
-              as String?,
       subscriptionId: freezed == subscriptionId
           ? _self.subscriptionId
           : subscriptionId // ignore: cast_nullable_to_non_nullable
@@ -495,20 +384,6 @@ class __$FhirEventCopyWithImpl<$Res> implements _$FhirEventCopyWith<$Res> {
           : criteria // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
-  }
-
-  /// Create a copy of FhirEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $FhirEventDataCopyWith<$Res>? get data {
-    if (_self.data == null) {
-      return null;
-    }
-
-    return $FhirEventDataCopyWith<$Res>(_self.data!, (value) {
-      return _then(_self.copyWith(data: value));
-    });
   }
 }
 

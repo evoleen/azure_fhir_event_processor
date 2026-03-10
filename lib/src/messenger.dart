@@ -15,8 +15,8 @@ class Messenger implements MessengerAbstract {
     required List<AbstractActionExecutor> actionExecutors,
     List<AbstractPostProcessor>? postProcessors,
     int? messageVisibilityTimeout,
-    /// Use [QueueMessageEncoding.none] and [SubscriptionNotificationFhirMessageParser()]
-    /// for Fire Arrow MESSAGE channel (plain JSON). Default: Base64 + CloudEvents.
+    /// Use [QueueMessageEncoding.none] and [HapiSubscriptionNotificationMessageParser()]
+    /// for HAPI/Fire Arrow MESSAGE channel (plain JSON). Default: Base64 + [AhdsEventGridMessageParser].
     QueueMessageEncoding messageEncoding = QueueMessageEncoding.base64,
     AbstractFhirMessageParser? parser,
   }) {

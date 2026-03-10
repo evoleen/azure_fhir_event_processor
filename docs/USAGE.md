@@ -4,9 +4,9 @@ This document shows how to use the package with the **Messenger** API (recommend
 
 ---
 
-## 1. Azure Healthcare APIs queue (Event Grid / CloudEvents) — existing usage
+## 1. AHDS queue (Azure Health Data Services / Event Grid)
 
-Use when your queue receives **Base64-encoded** CloudEvents from Azure Healthcare APIs. Your existing setup stays the same; no code changes needed.
+Use when your queue receives **Base64-encoded** CloudEvents from **Azure Health Data Services (AHDS)** via Event Grid. Default: no parser or encoding changes needed (uses `AhdsEventGridMessageParser` and Base64).
 
 ```dart
 import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
@@ -22,7 +22,7 @@ final messenger = Messenger.setupWithAzure(
     PatientReportGenerationExecutor(),
     PatientEmailReportSenderExecutor(),
   ],
-  postProcessors: [DeleteMessagePostProcessor()],  // or RemoveMessagePostProcessor() from package
+  postProcessors: [RemoveMessagePostProcessor()],  // or your own (e.g. delete after process)
 );
 
 talker.info('Starting queue listener.');
@@ -35,9 +35,9 @@ await messenger.listen(
 
 ---
 
-## 2. Fire Arrow MESSAGE channel queue (subscription notifications)
+## 2. HAPI queue (HAPI FHIR / Fire Arrow MESSAGE channel)
 
-Use when your queue receives **plain JSON** from the Fire Arrow MESSAGE channel (see [MESSAGE_CHANNEL_SUBSCRIPTIONS_AZURE_QUEUE.md](MESSAGE_CHANNEL_SUBSCRIPTIONS_AZURE_QUEUE.md)). Only two extra arguments:
+Use when your queue receives **plain JSON** subscription notifications from **HAPI FHIR** (e.g. Fire Arrow) MESSAGE channel (see [MESSAGE_CHANNEL_SUBSCRIPTIONS_AZURE_QUEUE.md](MESSAGE_CHANNEL_SUBSCRIPTIONS_AZURE_QUEUE.md)). Add two arguments: `messageEncoding: QueueMessageEncoding.none` and `parser: HapiSubscriptionNotificationMessageParser()`.
 
 ```dart
 import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
@@ -49,13 +49,13 @@ final messenger = Messenger.setupWithAzure(
   poisonedMessageTtl: 604800,
   messageVisibilityTimeout: 180,
   messageEncoding: QueueMessageEncoding.none,   // plain JSON, no Base64
-  parser: SubscriptionNotificationFhirMessageParser(),
+  parser: HapiSubscriptionNotificationMessageParser(),
   eventValidators: [PoisonEventValidator()],
   actionExecutors: [
     PatientReportGenerationExecutor(),
     PatientEmailReportSenderExecutor(),
   ],
-  postProcessors: [DeleteMessagePostProcessor()],  // or RemoveMessagePostProcessor()
+  postProcessors: [RemoveMessagePostProcessor()],
 );
 
 await messenger.listen(
@@ -64,9 +64,9 @@ await messenger.listen(
 );
 ```
 
-Your existing executors (e.g. `PatientReportGenerationExecutor`) work as-is: they use `fhirEvent.eventType`, `fhirEvent.resourceType`, and `fhirEvent.resourceId`, which are the same for both queue formats.
+Executors receive `FhirEvent` (the abstract base). The runtime type is `AhdsFhirEvent` or `HapiFhirEvent`, so you only see the common fields (`eventType`, `resourceType`, `resourceId`, `resourceVersionId`, `payloadResource`) unless you cast: e.g. `if (fhirEvent is HapiFhirEvent) { ... hapiEvent.subscriptionId ... }`.
 
-**Why `eventTypes` and `resourceTypes` are still needed:** The processor uses them to decide *which* executor runs for each message. Fire Arrow messages are normalized to the same `FhirEventType` (e.g. CREATE → `resourceCreated`) and the same `resourceType` string (e.g. `"CarePlan"` from the notification), so the same filtering applies. If you omit them or use `['*']`, that executor would run for every message; with `resourceTypes: ['CarePlan']` it runs only when the message is for a CarePlan.
+**Why `eventTypes` and `resourceTypes` are still needed:** The processor uses them to decide *which* executor runs for each message. HAPI messages are normalized to the same `FhirEventType` (e.g. CREATE → `resourceCreated`) and the same `resourceType` string (e.g. `"CarePlan"` from the notification), so the same filtering applies. If you omit them or use `['*']`, that executor would run for every message; with `resourceTypes: ['CarePlan']` it runs only when the message is for a CarePlan.
 
 ---
 
@@ -102,14 +102,14 @@ class PatientReportGenerationExecutor implements AbstractActionExecutor {
     final resourceType = fhirEvent.resourceType;
     final resourceId = fhirEvent.resourceId;
 
-    // When the message includes the full resource (Fire Arrow with include-full-resource: true)
+    // When the message includes the full resource (HAPI with include-full-resource: true)
     final resource = fhirEvent.payloadResource;
     if (resource != null && resource is CarePlan) {
       // Use typed CarePlan from fhir_r4
       // e.g. resource.title?.valueString, resource.activity, etc.
       await generateReportFromCarePlan(resource);
     } else {
-      // No payload (e.g. metadata-only or CloudEvents queue) — fetch by resourceId if needed
+      // No payload (e.g. metadata-only or AHDS queue) — fetch by resourceId if needed
       await generateReportFromId(resourceType, resourceId);
     }
   }
@@ -118,9 +118,8 @@ class PatientReportGenerationExecutor implements AbstractActionExecutor {
 
 Summary:
 
-- **`fhirEvent.payload`** – raw payload string (if present).
-- **`fhirEvent.payloadContentType`** – e.g. `application/fhir+json`.
-- **`fhirEvent.payloadResource`** – parsed `Resource?` from [fhir_r4](https://pub.dev/packages/fhir_r4); non-null only when payload is JSON and parsing succeeds. Use `resource is CarePlan`, `resource is Patient`, etc., to work with specific types.
+- **`fhirEvent.payloadResource`** (on base `FhirEvent`) – parsed `Resource?` from [fhir_r4](https://pub.dev/packages/fhir_r4); non-null only for `HapiFhirEvent` when payload is JSON and parsing succeeds. Use `resource is CarePlan`, `resource is Patient`, etc.
+- For HAPI-only fields (e.g. `payload`, `payloadContentType`, `subscriptionId`), cast: `if (fhirEvent is HapiFhirEvent) { ... }`. For AHDS-only fields (`topic`, `subject`, `data`), cast to `AhdsFhirEvent`.
 
 ---
 
@@ -129,22 +128,22 @@ Summary:
 If you prefer to wire the processor yourself instead of using `Messenger`:
 
 ```dart
-// Azure Healthcare APIs (default)
+// AHDS (Azure Health Data Services) Event Grid — default
 final messageClient = AzureMessageClient(
   connectionString: connectionString,
   queueName: queueName,
   messageVisibilityTimeout: 180,
   // messageEncoding: QueueMessageEncoding.base64 (default)
-  // parser: CloudEventsFhirMessageParser() (default)
+  // parser: AhdsEventGridMessageParser() (default)
 );
 
-// Fire Arrow MESSAGE channel
+// HAPI FHIR MESSAGE channel (e.g. Fire Arrow)
 final messageClient = AzureMessageClient(
   connectionString: connectionString,
   queueName: queueName,
   messageVisibilityTimeout: 180,
   messageEncoding: QueueMessageEncoding.none,
-  parser: SubscriptionNotificationFhirMessageParser(),
+  parser: HapiSubscriptionNotificationMessageParser(),
 );
 
 final processor = AzureEventProcessor(messageClient: messageClient);

@@ -19,7 +19,7 @@ class AzureMessageClient implements AbstractFhirMessageClient {
         _poisonedMessageTtl = poisonedMessageTtl ?? -1,
         _msgVisibilityTimeout = messageVisibilityTimeout ?? 30,
         _messageEncoding = messageEncoding,
-        _parser = parser ?? CloudEventsFhirMessageParser() {
+        _parser = parser ?? AhdsEventGridMessageParser() {
     _storage = azureStorage ?? AzureStorage.parse(_connectionString);
   }
 
@@ -36,9 +36,12 @@ class AzureMessageClient implements AbstractFhirMessageClient {
   Future<void> sanitizeMessage(
       {required FhirMessage fhirPoisonedMessage}) async {
     final message = _serializeToFhirMessage(fhirPoisonedMessage);
+    // Azure Put Message wraps the body in XML; raw JSON can contain <, >, &
+    // and invalidate the document. Base64 so the payload is XML-safe.
+    final xmlSafeBody = base64.encode(utf8.encode(message));
     await _storage.putQMessage(
       qName: _poisonQueueName,
-      message: message,
+      message: xmlSafeBody,
       messagettl: _poisonedMessageTtl,
     );
     await removeMessage(fhirMessage: fhirPoisonedMessage);

@@ -5,12 +5,14 @@ library;
 
 export 'src/fhir_message_client/abstract_fhir_message_client.dart';
 export 'src/fhir_message_client/abstract_fhir_message_parser.dart';
+export 'src/fhir_message_client/parsers/ahds_event_grid_message_parser.dart';
 export 'src/fhir_message_client/azure_message_client.dart';
-export 'src/fhir_message_client/cloud_events_fhir_message_parser.dart';
+export 'src/fhir_message_client/parsers/hapi_subscription_notification_message_parser.dart';
 export 'src/fhir_message_client/queue_message_metadata.dart';
-export 'src/fhir_message_client/subscription_notification_fhir_message_parser.dart';
+export 'src/fhir_message_client/models/ahds/ahds_event_data.dart';
+export 'src/fhir_message_client/models/ahds/ahds_fhir_event.dart';
 export 'src/fhir_message_client/models/fhir_event.dart';
-export 'src/fhir_message_client/models/fhir_event_body.dart';
+export 'src/fhir_message_client/models/hapi/hapi_fhir_event.dart';
 export 'src/fhir_message_client/models/fhir_message.dart';
 export 'src/fhir_event_processor/abstract_fhir_event_processor.dart';
 export 'src/fhir_event_processor/azure_event_processor.dart';

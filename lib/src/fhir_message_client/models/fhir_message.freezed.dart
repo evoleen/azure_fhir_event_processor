@@ -76,8 +76,6 @@ abstract mixin class $FhirMessageCopyWith<$Res> {
       String popReceipt,
       @JsonKey(fromJson: _fhirEventFromJson, toJson: _fhirEventToJson)
       FhirEvent fhirEvent});
-
-  $FhirEventCopyWith<$Res> get fhirEvent;
 }
 
 /// @nodoc
@@ -125,16 +123,6 @@ class _$FhirMessageCopyWithImpl<$Res> implements $FhirMessageCopyWith<$Res> {
           : fhirEvent // ignore: cast_nullable_to_non_nullable
               as FhirEvent,
     ));
-  }
-
-  /// Create a copy of FhirMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $FhirEventCopyWith<$Res> get fhirEvent {
-    return $FhirEventCopyWith<$Res>(_self.fhirEvent, (value) {
-      return _then(_self.copyWith(fhirEvent: value));
-    });
   }
 }
 
@@ -226,9 +214,6 @@ abstract mixin class _$FhirMessageCopyWith<$Res>
       String popReceipt,
       @JsonKey(fromJson: _fhirEventFromJson, toJson: _fhirEventToJson)
       FhirEvent fhirEvent});
-
-  @override
-  $FhirEventCopyWith<$Res> get fhirEvent;
 }
 
 /// @nodoc
@@ -276,16 +261,6 @@ class __$FhirMessageCopyWithImpl<$Res> implements _$FhirMessageCopyWith<$Res> {
           : fhirEvent // ignore: cast_nullable_to_non_nullable
               as FhirEvent,
     ));
-  }
-
-  /// Create a copy of FhirMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $FhirEventCopyWith<$Res> get fhirEvent {
-    return $FhirEventCopyWith<$Res>(_self.fhirEvent, (value) {
-      return _then(_self.copyWith(fhirEvent: value));
-    });
   }
 }
 

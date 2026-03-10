@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'fhir_event_body.dart';
+part of 'ahds_event_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_FhirEventData _$FhirEventDataFromJson(Map<String, dynamic> json) =>
-    _FhirEventData(
+_AhdsEventData _$AhdsEventDataFromJson(Map<String, dynamic> json) =>
+    _AhdsEventData(
       resourceFhirId: json['resourceFhirId'] as String,
       resourceType: json['resourceType'] as String,
       resourceFhirAccount: json['resourceFhirAccount'] as String,
       resourceVersionId: (json['resourceVersionId'] as num).toInt(),
     );
 
-Map<String, dynamic> _$FhirEventDataToJson(_FhirEventData instance) =>
+Map<String, dynamic> _$AhdsEventDataToJson(_AhdsEventData instance) =>
     <String, dynamic>{
       'resourceFhirId': instance.resourceFhirId,
       'resourceType': instance.resourceType,

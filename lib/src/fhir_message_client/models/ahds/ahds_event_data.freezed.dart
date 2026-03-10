@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'fhir_event_body.dart';
+part of 'ahds_event_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,28 +14,28 @@ part of 'fhir_event_body.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$FhirEventData {
+mixin _$AhdsEventData {
   String get resourceFhirId;
   String get resourceType;
   String get resourceFhirAccount;
   int get resourceVersionId;
 
-  /// Create a copy of FhirEventData
+  /// Create a copy of AhdsEventData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $FhirEventDataCopyWith<FhirEventData> get copyWith =>
-      _$FhirEventDataCopyWithImpl<FhirEventData>(
-          this as FhirEventData, _$identity);
+  $AhdsEventDataCopyWith<AhdsEventData> get copyWith =>
+      _$AhdsEventDataCopyWithImpl<AhdsEventData>(
+          this as AhdsEventData, _$identity);
 
-  /// Serializes this FhirEventData to a JSON map.
+  /// Serializes this AhdsEventData to a JSON map.
   Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is FhirEventData &&
+            other is AhdsEventData &&
             (identical(other.resourceFhirId, resourceFhirId) ||
                 other.resourceFhirId == resourceFhirId) &&
             (identical(other.resourceType, resourceType) ||
@@ -53,15 +53,15 @@ mixin _$FhirEventData {
 
   @override
   String toString() {
-    return 'FhirEventData(resourceFhirId: $resourceFhirId, resourceType: $resourceType, resourceFhirAccount: $resourceFhirAccount, resourceVersionId: $resourceVersionId)';
+    return 'AhdsEventData(resourceFhirId: $resourceFhirId, resourceType: $resourceType, resourceFhirAccount: $resourceFhirAccount, resourceVersionId: $resourceVersionId)';
   }
 }
 
 /// @nodoc
-abstract mixin class $FhirEventDataCopyWith<$Res> {
-  factory $FhirEventDataCopyWith(
-          FhirEventData value, $Res Function(FhirEventData) _then) =
-      _$FhirEventDataCopyWithImpl;
+abstract mixin class $AhdsEventDataCopyWith<$Res> {
+  factory $AhdsEventDataCopyWith(
+          AhdsEventData value, $Res Function(AhdsEventData) _then) =
+      _$AhdsEventDataCopyWithImpl;
   @useResult
   $Res call(
       {String resourceFhirId,
@@ -71,14 +71,14 @@ abstract mixin class $FhirEventDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FhirEventDataCopyWithImpl<$Res>
-    implements $FhirEventDataCopyWith<$Res> {
-  _$FhirEventDataCopyWithImpl(this._self, this._then);
+class _$AhdsEventDataCopyWithImpl<$Res>
+    implements $AhdsEventDataCopyWith<$Res> {
+  _$AhdsEventDataCopyWithImpl(this._self, this._then);
 
-  final FhirEventData _self;
-  final $Res Function(FhirEventData) _then;
+  final AhdsEventData _self;
+  final $Res Function(AhdsEventData) _then;
 
-  /// Create a copy of FhirEventData
+  /// Create a copy of AhdsEventData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -111,14 +111,14 @@ class _$FhirEventDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _FhirEventData implements FhirEventData {
-  const _FhirEventData(
+class _AhdsEventData implements AhdsEventData {
+  const _AhdsEventData(
       {required this.resourceFhirId,
       required this.resourceType,
       required this.resourceFhirAccount,
       required this.resourceVersionId});
-  factory _FhirEventData.fromJson(Map<String, dynamic> json) =>
-      _$FhirEventDataFromJson(json);
+  factory _AhdsEventData.fromJson(Map<String, dynamic> json) =>
+      _$AhdsEventDataFromJson(json);
 
   @override
   final String resourceFhirId;
@@ -129,17 +129,17 @@ class _FhirEventData implements FhirEventData {
   @override
   final int resourceVersionId;
 
-  /// Create a copy of FhirEventData
+  /// Create a copy of AhdsEventData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$FhirEventDataCopyWith<_FhirEventData> get copyWith =>
-      __$FhirEventDataCopyWithImpl<_FhirEventData>(this, _$identity);
+  _$AhdsEventDataCopyWith<_AhdsEventData> get copyWith =>
+      __$AhdsEventDataCopyWithImpl<_AhdsEventData>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$FhirEventDataToJson(
+    return _$AhdsEventDataToJson(
       this,
     );
   }
@@ -148,7 +148,7 @@ class _FhirEventData implements FhirEventData {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FhirEventData &&
+            other is _AhdsEventData &&
             (identical(other.resourceFhirId, resourceFhirId) ||
                 other.resourceFhirId == resourceFhirId) &&
             (identical(other.resourceType, resourceType) ||
@@ -166,16 +166,16 @@ class _FhirEventData implements FhirEventData {
 
   @override
   String toString() {
-    return 'FhirEventData(resourceFhirId: $resourceFhirId, resourceType: $resourceType, resourceFhirAccount: $resourceFhirAccount, resourceVersionId: $resourceVersionId)';
+    return 'AhdsEventData(resourceFhirId: $resourceFhirId, resourceType: $resourceType, resourceFhirAccount: $resourceFhirAccount, resourceVersionId: $resourceVersionId)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$FhirEventDataCopyWith<$Res>
-    implements $FhirEventDataCopyWith<$Res> {
-  factory _$FhirEventDataCopyWith(
-          _FhirEventData value, $Res Function(_FhirEventData) _then) =
-      __$FhirEventDataCopyWithImpl;
+abstract mixin class _$AhdsEventDataCopyWith<$Res>
+    implements $AhdsEventDataCopyWith<$Res> {
+  factory _$AhdsEventDataCopyWith(
+          _AhdsEventData value, $Res Function(_AhdsEventData) _then) =
+      __$AhdsEventDataCopyWithImpl;
   @override
   @useResult
   $Res call(
@@ -186,14 +186,14 @@ abstract mixin class _$FhirEventDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$FhirEventDataCopyWithImpl<$Res>
-    implements _$FhirEventDataCopyWith<$Res> {
-  __$FhirEventDataCopyWithImpl(this._self, this._then);
+class __$AhdsEventDataCopyWithImpl<$Res>
+    implements _$AhdsEventDataCopyWith<$Res> {
+  __$AhdsEventDataCopyWithImpl(this._self, this._then);
 
-  final _FhirEventData _self;
-  final $Res Function(_FhirEventData) _then;
+  final _AhdsEventData _self;
+  final $Res Function(_AhdsEventData) _then;
 
-  /// Create a copy of FhirEventData
+  /// Create a copy of AhdsEventData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -203,7 +203,7 @@ class __$FhirEventDataCopyWithImpl<$Res>
     Object? resourceFhirAccount = null,
     Object? resourceVersionId = null,
   }) {
-    return _then(_FhirEventData(
+    return _then(_AhdsEventData(
       resourceFhirId: null == resourceFhirId
           ? _self.resourceFhirId
           : resourceFhirId // ignore: cast_nullable_to_non_nullable
