@@ -1,15 +1,9 @@
 import 'dart:convert';
+
 import 'package:azstore/azstore.dart';
 import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
 
 class AzureMessageClient implements AbstractFhirMessageClient {
-  late AzureStorage _storage;
-  late String _connectionString;
-  late String _queueName;
-  late String _poisonQueueName;
-  int? _msgVisibilityTimeout;
-  late int _poisonedMessageTtl;
-
   AzureMessageClient({
     required connectionString,
     required String queueName,
@@ -17,36 +11,45 @@ class AzureMessageClient implements AbstractFhirMessageClient {
     int? messageVisibilityTimeout,
     int? poisonedMessageTtl,
     AzureStorage? azureStorage,
-  }) {
-    _connectionString = connectionString;
-    _queueName = queueName;
-    _poisonQueueName = poisonQueueName ?? "poisoned-messages";
-    _poisonedMessageTtl = poisonedMessageTtl ?? -1;
-    _msgVisibilityTimeout = messageVisibilityTimeout ?? 30;
+    QueueMessageEncoding messageEncoding = QueueMessageEncoding.base64,
+    AbstractFhirMessageParser? parser,
+  })  : _connectionString = connectionString,
+        _queueName = queueName,
+        _poisonQueueName = poisonQueueName ?? 'poisoned-messages',
+        _poisonedMessageTtl = poisonedMessageTtl ?? -1,
+        _msgVisibilityTimeout = messageVisibilityTimeout ?? 30,
+        _messageEncoding = messageEncoding,
+        _parser = parser ?? CloudEventsFhirMessageParser() {
     _storage = azureStorage ?? AzureStorage.parse(_connectionString);
   }
+
+  late final String _connectionString;
+  late final AzureStorage _storage;
+  late final String _queueName;
+  late final String _poisonQueueName;
+  late final int _msgVisibilityTimeout;
+  late final int _poisonedMessageTtl;
+  late final QueueMessageEncoding _messageEncoding;
+  late final AbstractFhirMessageParser _parser;
 
   @override
   Future<void> sanitizeMessage(
       {required FhirMessage fhirPoisonedMessage}) async {
-    String message = _serializeToFhirMessage(fhirPoisonedMessage);
-
-    // Send message to poison queue
+    final message = _serializeToFhirMessage(fhirPoisonedMessage);
     await _storage.putQMessage(
-        qName: _poisonQueueName,
-        message: message,
-        messagettl: _poisonedMessageTtl);
-    // Remove message from current queue
+      qName: _poisonQueueName,
+      message: message,
+      messagettl: _poisonedMessageTtl,
+    );
     await removeMessage(fhirMessage: fhirPoisonedMessage);
   }
 
   @override
   Future<bool> queueIsNotEmpty() async {
-    List<AzureQMessage> messages = await _storage.peekQmessages(
+    final messages = await _storage.peekQmessages(
       qName: _queueName,
       numofmessages: 10,
     );
-
     return messages.isNotEmpty;
   }
 
@@ -60,44 +63,41 @@ class AzureMessageClient implements AbstractFhirMessageClient {
   }
 
   @override
-  Future<List<FhirMessage>> consumeMessages({required messagesCount}) async {
-    List<FhirMessage> fhirMessages = [];
-
-    List<AzureQMessage> messages = await _storage.getQmessages(
+  Future<List<FhirMessage>> consumeMessages({required int messagesCount}) async {
+    final messages = await _storage.getQmessages(
       qName: _queueName,
       numOfmessages: messagesCount,
       visibilitytimeout: _msgVisibilityTimeout,
     );
+    if (messages.isEmpty) return List.empty();
 
-    if (messages.isEmpty) {
-      return List.empty();
+    final result = <FhirMessage>[];
+    for (final azureMessage in messages) {
+      result.add(_deserializeToFhirMessage(azureMessage));
     }
-
-    for (AzureQMessage azureMessage in messages) {
-      final FhirMessage fhirMessage = _deserializeToFhirMessage(azureMessage);
-      fhirMessages.add(fhirMessage);
-    }
-
-    return fhirMessages;
+    return result;
   }
 
   FhirMessage _deserializeToFhirMessage(AzureQMessage azureMessage) {
-    // We decode from base64 and get json string
-    azureMessage.messageText = _getDecoder().decode(
-      azureMessage.messageText ?? "",
+    var body = azureMessage.messageText ?? '';
+    if (_messageEncoding == QueueMessageEncoding.base64) {
+      body = utf8.decode(base64.decode(body));
+    }
+    final metadata = QueueMessageMetadata(
+      id: azureMessage.messageId ?? '',
+      popReceipt: azureMessage.popReceipt ?? '',
+      insertionTime: azureMessage.insertionTime ?? '',
+      expirationTime: azureMessage.expirationTime ?? '',
+      dequeueCount: int.tryParse(azureMessage.dequeueCount ?? '') ?? 0,
     );
-    FhirMessage fhirMessage = FhirMessage.fromAzureQMessage(azureMessage);
-
-    return fhirMessage;
+    return _parser.parse(body, metadata);
   }
 
   String _serializeToFhirMessage(FhirMessage fhirMessage) {
-    String fhirMessageAsJsonStr = jsonEncode(fhirMessage.toJson());
-
-    return _getDecoder().encode(fhirMessageAsJsonStr);
-  }
-
-  Codec<String, String> _getDecoder() {
-    return utf8.fuse(base64);
+    final jsonStr = jsonEncode(fhirMessage.toJson());
+    if (_messageEncoding == QueueMessageEncoding.base64) {
+      return base64.encode(utf8.encode(jsonStr));
+    }
+    return jsonStr;
   }
 }

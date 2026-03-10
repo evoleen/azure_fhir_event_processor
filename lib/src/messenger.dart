@@ -8,13 +8,17 @@ class Messenger implements MessengerAbstract {
 
   factory Messenger.setupWithAzure({
     required String connectionString,
-    required queueName,
+    required String queueName,
     String? poisonQueueName,
     int? poisonedMessageTtl,
     required List<AbstractEventValidator> eventValidators,
     required List<AbstractActionExecutor> actionExecutors,
     List<AbstractPostProcessor>? postProcessors,
     int? messageVisibilityTimeout,
+    /// Use [QueueMessageEncoding.none] and [SubscriptionNotificationFhirMessageParser()]
+    /// for Fire Arrow MESSAGE channel (plain JSON). Default: Base64 + CloudEvents.
+    QueueMessageEncoding messageEncoding = QueueMessageEncoding.base64,
+    AbstractFhirMessageParser? parser,
   }) {
     AbstractFhirMessageClient messageClient = AzureMessageClient(
       connectionString: connectionString,
@@ -22,6 +26,8 @@ class Messenger implements MessengerAbstract {
       poisonQueueName: poisonQueueName,
       poisonedMessageTtl: poisonedMessageTtl,
       messageVisibilityTimeout: messageVisibilityTimeout,
+      messageEncoding: messageEncoding,
+      parser: parser,
     );
 
     AbstractFhirEventProcessor eventProcessor =

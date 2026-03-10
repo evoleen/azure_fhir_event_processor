@@ -6,32 +6,54 @@ part of 'fhir_event.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FhirEventImpl _$$FhirEventImplFromJson(Map<String, dynamic> json) =>
-    _$FhirEventImpl(
+_FhirEvent _$FhirEventFromJson(Map<String, dynamic> json) => _FhirEvent(
       id: json['id'] as String,
-      topic: json['topic'] as String,
-      subject: json['subject'] as String,
-      data: FhirEventData.fromJson(json['data'] as Map<String, dynamic>),
-      eventType: $enumDecode(_$FhirEventTypeEnumMap, json['eventType']),
-      dataVersion: json['dataVersion'] as String,
-      metadataVersion: json['metadataVersion'] as String,
-      eventTime: json['eventTime'] as String,
+      eventType: const FhirEventTypeConverter().fromJson(json['eventType'] as String),
+      topic: json['topic'] as String?,
+      subject: json['subject'] as String?,
+      data: json['data'] == null
+          ? null
+          : FhirEventData.fromJson(json['data'] as Map<String, dynamic>),
+      dataVersion: json['dataVersion'] as String?,
+      metadataVersion: json['metadataVersion'] as String?,
+      eventTime: json['eventTime'] as String?,
+      subscriptionId: json['subscriptionId'] as String?,
+      subscriptionTimestamp: json['subscriptionTimestamp'] as String?,
+      subscriptionResourceType: json['subscriptionResourceType'] as String?,
+      subscriptionResourceId: json['subscriptionResourceId'] as String?,
+      subscriptionResourceVersionId:
+          json['subscriptionResourceVersionId'] as String?,
+      payload: json['payload'] as String?,
+      payloadContentType: json['payloadContentType'] as String?,
+      criteria: json['criteria'] as String?,
     );
 
-Map<String, dynamic> _$$FhirEventImplToJson(_$FhirEventImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'topic': instance.topic,
-      'subject': instance.subject,
-      'data': instance.data.toJson(),
-      'eventType': _$FhirEventTypeEnumMap[instance.eventType]!,
-      'dataVersion': instance.dataVersion,
-      'metadataVersion': instance.metadataVersion,
-      'eventTime': instance.eventTime,
-    };
+Map<String, dynamic> _$FhirEventToJson(_FhirEvent instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'eventType': const FhirEventTypeConverter().toJson(instance.eventType),
+  };
 
-const _$FhirEventTypeEnumMap = {
-  FhirEventType.resourceDeleted: 'Microsoft.HealthcareApis.FhirResourceDeleted',
-  FhirEventType.resourceCreated: 'Microsoft.HealthcareApis.FhirResourceCreated',
-  FhirEventType.resourceUpdated: 'Microsoft.HealthcareApis.FhirResourceUpdated',
-};
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('topic', instance.topic);
+  writeNotNull('subject', instance.subject);
+  writeNotNull('data', instance.data?.toJson());
+  writeNotNull('dataVersion', instance.dataVersion);
+  writeNotNull('metadataVersion', instance.metadataVersion);
+  writeNotNull('eventTime', instance.eventTime);
+  writeNotNull('subscriptionId', instance.subscriptionId);
+  writeNotNull('subscriptionTimestamp', instance.subscriptionTimestamp);
+  writeNotNull('subscriptionResourceType', instance.subscriptionResourceType);
+  writeNotNull('subscriptionResourceId', instance.subscriptionResourceId);
+  writeNotNull(
+      'subscriptionResourceVersionId', instance.subscriptionResourceVersionId);
+  writeNotNull('payload', instance.payload);
+  writeNotNull('payloadContentType', instance.payloadContentType);
+  writeNotNull('criteria', instance.criteria);
+  return val;
+}

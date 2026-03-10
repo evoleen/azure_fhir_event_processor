@@ -4,7 +4,7 @@ part 'fhir_event_body.freezed.dart';
 part 'fhir_event_body.g.dart';
 
 @freezed
-class FhirEventData with _$FhirEventData {
+abstract class FhirEventData with _$FhirEventData {
   const factory FhirEventData({
     required String resourceFhirId,
     required String resourceType,

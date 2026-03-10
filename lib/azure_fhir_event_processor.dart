@@ -4,7 +4,11 @@
 library;
 
 export 'src/fhir_message_client/abstract_fhir_message_client.dart';
+export 'src/fhir_message_client/abstract_fhir_message_parser.dart';
 export 'src/fhir_message_client/azure_message_client.dart';
+export 'src/fhir_message_client/cloud_events_fhir_message_parser.dart';
+export 'src/fhir_message_client/queue_message_metadata.dart';
+export 'src/fhir_message_client/subscription_notification_fhir_message_parser.dart';
 export 'src/fhir_message_client/models/fhir_event.dart';
 export 'src/fhir_message_client/models/fhir_event_body.dart';
 export 'src/fhir_message_client/models/fhir_message.dart';

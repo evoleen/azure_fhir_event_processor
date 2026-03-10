@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,319 +10,506 @@ part of 'fhir_event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-FhirEvent _$FhirEventFromJson(Map<String, dynamic> json) {
-  return _FhirEvent.fromJson(json);
-}
 
 /// @nodoc
 mixin _$FhirEvent {
-  String get id => throw _privateConstructorUsedError;
-  String get topic => throw _privateConstructorUsedError;
-  String get subject => throw _privateConstructorUsedError;
-  FhirEventData get data => throw _privateConstructorUsedError;
-  FhirEventType get eventType => throw _privateConstructorUsedError;
-  String get dataVersion => throw _privateConstructorUsedError;
-  String get metadataVersion => throw _privateConstructorUsedError;
-  String get eventTime => throw _privateConstructorUsedError;
-
-  /// Serializes this FhirEvent to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
+  @FhirEventTypeConverter()
+  FhirEventType get eventType; // CloudEvents (Azure Healthcare APIs) fields
+  String? get topic;
+  String? get subject;
+  FhirEventData? get data;
+  String? get dataVersion;
+  String? get metadataVersion;
+  String? get eventTime; // Fire Arrow MESSAGE channel subscription fields
+  String? get subscriptionId;
+  String? get subscriptionTimestamp;
+  String? get subscriptionResourceType;
+  String? get subscriptionResourceId;
+  String? get subscriptionResourceVersionId;
+  String? get payload;
+  String? get payloadContentType;
+  String? get criteria;
 
   /// Create a copy of FhirEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $FhirEventCopyWith<FhirEvent> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FhirEventCopyWith<$Res> {
-  factory $FhirEventCopyWith(FhirEvent value, $Res Function(FhirEvent) then) =
-      _$FhirEventCopyWithImpl<$Res, FhirEvent>;
-  @useResult
-  $Res call(
-      {String id,
-      String topic,
-      String subject,
-      FhirEventData data,
-      FhirEventType eventType,
-      String dataVersion,
-      String metadataVersion,
-      String eventTime});
-
-  $FhirEventDataCopyWith<$Res> get data;
-}
-
-/// @nodoc
-class _$FhirEventCopyWithImpl<$Res, $Val extends FhirEvent>
-    implements $FhirEventCopyWith<$Res> {
-  _$FhirEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of FhirEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? topic = null,
-    Object? subject = null,
-    Object? data = null,
-    Object? eventType = null,
-    Object? dataVersion = null,
-    Object? metadataVersion = null,
-    Object? eventTime = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      topic: null == topic
-          ? _value.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as String,
-      subject: null == subject
-          ? _value.subject
-          : subject // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as FhirEventData,
-      eventType: null == eventType
-          ? _value.eventType
-          : eventType // ignore: cast_nullable_to_non_nullable
-              as FhirEventType,
-      dataVersion: null == dataVersion
-          ? _value.dataVersion
-          : dataVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      metadataVersion: null == metadataVersion
-          ? _value.metadataVersion
-          : metadataVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      eventTime: null == eventTime
-          ? _value.eventTime
-          : eventTime // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-
-  /// Create a copy of FhirEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $FhirEventDataCopyWith<$Res> get data {
-    return $FhirEventDataCopyWith<$Res>(_value.data, (value) {
-      return _then(_value.copyWith(data: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$FhirEventImplCopyWith<$Res>
-    implements $FhirEventCopyWith<$Res> {
-  factory _$$FhirEventImplCopyWith(
-          _$FhirEventImpl value, $Res Function(_$FhirEventImpl) then) =
-      __$$FhirEventImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String topic,
-      String subject,
-      FhirEventData data,
-      FhirEventType eventType,
-      String dataVersion,
-      String metadataVersion,
-      String eventTime});
-
-  @override
-  $FhirEventDataCopyWith<$Res> get data;
-}
-
-/// @nodoc
-class __$$FhirEventImplCopyWithImpl<$Res>
-    extends _$FhirEventCopyWithImpl<$Res, _$FhirEventImpl>
-    implements _$$FhirEventImplCopyWith<$Res> {
-  __$$FhirEventImplCopyWithImpl(
-      _$FhirEventImpl _value, $Res Function(_$FhirEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FhirEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? topic = null,
-    Object? subject = null,
-    Object? data = null,
-    Object? eventType = null,
-    Object? dataVersion = null,
-    Object? metadataVersion = null,
-    Object? eventTime = null,
-  }) {
-    return _then(_$FhirEventImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      topic: null == topic
-          ? _value.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as String,
-      subject: null == subject
-          ? _value.subject
-          : subject // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as FhirEventData,
-      eventType: null == eventType
-          ? _value.eventType
-          : eventType // ignore: cast_nullable_to_non_nullable
-              as FhirEventType,
-      dataVersion: null == dataVersion
-          ? _value.dataVersion
-          : dataVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      metadataVersion: null == metadataVersion
-          ? _value.metadataVersion
-          : metadataVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      eventTime: null == eventTime
-          ? _value.eventTime
-          : eventTime // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$FhirEventImpl implements _FhirEvent {
-  const _$FhirEventImpl(
-      {required this.id,
-      required this.topic,
-      required this.subject,
-      required this.data,
-      required this.eventType,
-      required this.dataVersion,
-      required this.metadataVersion,
-      required this.eventTime});
-
-  factory _$FhirEventImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FhirEventImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String topic;
-  @override
-  final String subject;
-  @override
-  final FhirEventData data;
-  @override
-  final FhirEventType eventType;
-  @override
-  final String dataVersion;
-  @override
-  final String metadataVersion;
-  @override
-  final String eventTime;
-
-  @override
-  String toString() {
-    return 'FhirEvent(id: $id, topic: $topic, subject: $subject, data: $data, eventType: $eventType, dataVersion: $dataVersion, metadataVersion: $metadataVersion, eventTime: $eventTime)';
-  }
+      _$FhirEventCopyWithImpl<FhirEvent>(this as FhirEvent, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FhirEventImpl &&
+            other is FhirEvent &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
             (identical(other.topic, topic) || other.topic == topic) &&
             (identical(other.subject, subject) || other.subject == subject) &&
             (identical(other.data, data) || other.data == data) &&
-            (identical(other.eventType, eventType) ||
-                other.eventType == eventType) &&
             (identical(other.dataVersion, dataVersion) ||
                 other.dataVersion == dataVersion) &&
             (identical(other.metadataVersion, metadataVersion) ||
                 other.metadataVersion == metadataVersion) &&
             (identical(other.eventTime, eventTime) ||
-                other.eventTime == eventTime));
+                other.eventTime == eventTime) &&
+            (identical(other.subscriptionId, subscriptionId) ||
+                other.subscriptionId == subscriptionId) &&
+            (identical(other.subscriptionTimestamp, subscriptionTimestamp) ||
+                other.subscriptionTimestamp == subscriptionTimestamp) &&
+            (identical(
+                    other.subscriptionResourceType, subscriptionResourceType) ||
+                other.subscriptionResourceType == subscriptionResourceType) &&
+            (identical(other.subscriptionResourceId, subscriptionResourceId) ||
+                other.subscriptionResourceId == subscriptionResourceId) &&
+            (identical(other.subscriptionResourceVersionId,
+                    subscriptionResourceVersionId) ||
+                other.subscriptionResourceVersionId ==
+                    subscriptionResourceVersionId) &&
+            (identical(other.payload, payload) || other.payload == payload) &&
+            (identical(other.payloadContentType, payloadContentType) ||
+                other.payloadContentType == payloadContentType) &&
+            (identical(other.criteria, criteria) ||
+                other.criteria == criteria));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, topic, subject, data,
-      eventType, dataVersion, metadataVersion, eventTime);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      eventType,
+      topic,
+      subject,
+      data,
+      dataVersion,
+      metadataVersion,
+      eventTime,
+      subscriptionId,
+      subscriptionTimestamp,
+      subscriptionResourceType,
+      subscriptionResourceId,
+      subscriptionResourceVersionId,
+      payload,
+      payloadContentType,
+      criteria);
+
+  @override
+  String toString() {
+    return 'FhirEvent(id: $id, eventType: $eventType, topic: $topic, subject: $subject, data: $data, dataVersion: $dataVersion, metadataVersion: $metadataVersion, eventTime: $eventTime, subscriptionId: $subscriptionId, subscriptionTimestamp: $subscriptionTimestamp, subscriptionResourceType: $subscriptionResourceType, subscriptionResourceId: $subscriptionResourceId, subscriptionResourceVersionId: $subscriptionResourceVersionId, payload: $payload, payloadContentType: $payloadContentType, criteria: $criteria)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $FhirEventCopyWith<$Res> {
+  factory $FhirEventCopyWith(FhirEvent value, $Res Function(FhirEvent) _then) =
+      _$FhirEventCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      @FhirEventTypeConverter() FhirEventType eventType,
+      String? topic,
+      String? subject,
+      FhirEventData? data,
+      String? dataVersion,
+      String? metadataVersion,
+      String? eventTime,
+      String? subscriptionId,
+      String? subscriptionTimestamp,
+      String? subscriptionResourceType,
+      String? subscriptionResourceId,
+      String? subscriptionResourceVersionId,
+      String? payload,
+      String? payloadContentType,
+      String? criteria});
+
+  $FhirEventDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class _$FhirEventCopyWithImpl<$Res> implements $FhirEventCopyWith<$Res> {
+  _$FhirEventCopyWithImpl(this._self, this._then);
+
+  final FhirEvent _self;
+  final $Res Function(FhirEvent) _then;
 
   /// Create a copy of FhirEvent
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? eventType = null,
+    Object? topic = freezed,
+    Object? subject = freezed,
+    Object? data = freezed,
+    Object? dataVersion = freezed,
+    Object? metadataVersion = freezed,
+    Object? eventTime = freezed,
+    Object? subscriptionId = freezed,
+    Object? subscriptionTimestamp = freezed,
+    Object? subscriptionResourceType = freezed,
+    Object? subscriptionResourceId = freezed,
+    Object? subscriptionResourceVersionId = freezed,
+    Object? payload = freezed,
+    Object? payloadContentType = freezed,
+    Object? criteria = freezed,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      eventType: null == eventType
+          ? _self.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as FhirEventType,
+      topic: freezed == topic
+          ? _self.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subject: freezed == subject
+          ? _self.subject
+          : subject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as FhirEventData?,
+      dataVersion: freezed == dataVersion
+          ? _self.dataVersion
+          : dataVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadataVersion: freezed == metadataVersion
+          ? _self.metadataVersion
+          : metadataVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
+      eventTime: freezed == eventTime
+          ? _self.eventTime
+          : eventTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionId: freezed == subscriptionId
+          ? _self.subscriptionId
+          : subscriptionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionTimestamp: freezed == subscriptionTimestamp
+          ? _self.subscriptionTimestamp
+          : subscriptionTimestamp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionResourceType: freezed == subscriptionResourceType
+          ? _self.subscriptionResourceType
+          : subscriptionResourceType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionResourceId: freezed == subscriptionResourceId
+          ? _self.subscriptionResourceId
+          : subscriptionResourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionResourceVersionId: freezed == subscriptionResourceVersionId
+          ? _self.subscriptionResourceVersionId
+          : subscriptionResourceVersionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      payload: freezed == payload
+          ? _self.payload
+          : payload // ignore: cast_nullable_to_non_nullable
+              as String?,
+      payloadContentType: freezed == payloadContentType
+          ? _self.payloadContentType
+          : payloadContentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      criteria: freezed == criteria
+          ? _self.criteria
+          : criteria // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of FhirEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$FhirEventImplCopyWith<_$FhirEventImpl> get copyWith =>
-      __$$FhirEventImplCopyWithImpl<_$FhirEventImpl>(this, _$identity);
+  $FhirEventDataCopyWith<$Res>? get data {
+    if (_self.data == null) {
+      return null;
+    }
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FhirEventImplToJson(
-      this,
-    );
+    return $FhirEventDataCopyWith<$Res>(_self.data!, (value) {
+      return _then(_self.copyWith(data: value));
+    });
   }
 }
 
-abstract class _FhirEvent implements FhirEvent {
-  const factory _FhirEvent(
-      {required final String id,
-      required final String topic,
-      required final String subject,
-      required final FhirEventData data,
-      required final FhirEventType eventType,
-      required final String dataVersion,
-      required final String metadataVersion,
-      required final String eventTime}) = _$FhirEventImpl;
+/// @nodoc
 
-  factory _FhirEvent.fromJson(Map<String, dynamic> json) =
-      _$FhirEventImpl.fromJson;
+class _FhirEvent extends FhirEvent {
+  const _FhirEvent(
+      {required this.id,
+      @FhirEventTypeConverter() required this.eventType,
+      this.topic,
+      this.subject,
+      this.data,
+      this.dataVersion,
+      this.metadataVersion,
+      this.eventTime,
+      this.subscriptionId,
+      this.subscriptionTimestamp,
+      this.subscriptionResourceType,
+      this.subscriptionResourceId,
+      this.subscriptionResourceVersionId,
+      this.payload,
+      this.payloadContentType,
+      this.criteria})
+      : super._();
 
   @override
-  String get id;
+  final String id;
   @override
-  String get topic;
+  @FhirEventTypeConverter()
+  final FhirEventType eventType;
+// CloudEvents (Azure Healthcare APIs) fields
   @override
-  String get subject;
+  final String? topic;
   @override
-  FhirEventData get data;
+  final String? subject;
   @override
-  FhirEventType get eventType;
+  final FhirEventData? data;
   @override
-  String get dataVersion;
+  final String? dataVersion;
   @override
-  String get metadataVersion;
+  final String? metadataVersion;
   @override
-  String get eventTime;
+  final String? eventTime;
+// Fire Arrow MESSAGE channel subscription fields
+  @override
+  final String? subscriptionId;
+  @override
+  final String? subscriptionTimestamp;
+  @override
+  final String? subscriptionResourceType;
+  @override
+  final String? subscriptionResourceId;
+  @override
+  final String? subscriptionResourceVersionId;
+  @override
+  final String? payload;
+  @override
+  final String? payloadContentType;
+  @override
+  final String? criteria;
 
   /// Create a copy of FhirEvent
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FhirEventImplCopyWith<_$FhirEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$FhirEventCopyWith<_FhirEvent> get copyWith =>
+      __$FhirEventCopyWithImpl<_FhirEvent>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _FhirEvent &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.topic, topic) || other.topic == topic) &&
+            (identical(other.subject, subject) || other.subject == subject) &&
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.dataVersion, dataVersion) ||
+                other.dataVersion == dataVersion) &&
+            (identical(other.metadataVersion, metadataVersion) ||
+                other.metadataVersion == metadataVersion) &&
+            (identical(other.eventTime, eventTime) ||
+                other.eventTime == eventTime) &&
+            (identical(other.subscriptionId, subscriptionId) ||
+                other.subscriptionId == subscriptionId) &&
+            (identical(other.subscriptionTimestamp, subscriptionTimestamp) ||
+                other.subscriptionTimestamp == subscriptionTimestamp) &&
+            (identical(
+                    other.subscriptionResourceType, subscriptionResourceType) ||
+                other.subscriptionResourceType == subscriptionResourceType) &&
+            (identical(other.subscriptionResourceId, subscriptionResourceId) ||
+                other.subscriptionResourceId == subscriptionResourceId) &&
+            (identical(other.subscriptionResourceVersionId,
+                    subscriptionResourceVersionId) ||
+                other.subscriptionResourceVersionId ==
+                    subscriptionResourceVersionId) &&
+            (identical(other.payload, payload) || other.payload == payload) &&
+            (identical(other.payloadContentType, payloadContentType) ||
+                other.payloadContentType == payloadContentType) &&
+            (identical(other.criteria, criteria) ||
+                other.criteria == criteria));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      eventType,
+      topic,
+      subject,
+      data,
+      dataVersion,
+      metadataVersion,
+      eventTime,
+      subscriptionId,
+      subscriptionTimestamp,
+      subscriptionResourceType,
+      subscriptionResourceId,
+      subscriptionResourceVersionId,
+      payload,
+      payloadContentType,
+      criteria);
+
+  @override
+  String toString() {
+    return 'FhirEvent(id: $id, eventType: $eventType, topic: $topic, subject: $subject, data: $data, dataVersion: $dataVersion, metadataVersion: $metadataVersion, eventTime: $eventTime, subscriptionId: $subscriptionId, subscriptionTimestamp: $subscriptionTimestamp, subscriptionResourceType: $subscriptionResourceType, subscriptionResourceId: $subscriptionResourceId, subscriptionResourceVersionId: $subscriptionResourceVersionId, payload: $payload, payloadContentType: $payloadContentType, criteria: $criteria)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$FhirEventCopyWith<$Res>
+    implements $FhirEventCopyWith<$Res> {
+  factory _$FhirEventCopyWith(
+          _FhirEvent value, $Res Function(_FhirEvent) _then) =
+      __$FhirEventCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @FhirEventTypeConverter() FhirEventType eventType,
+      String? topic,
+      String? subject,
+      FhirEventData? data,
+      String? dataVersion,
+      String? metadataVersion,
+      String? eventTime,
+      String? subscriptionId,
+      String? subscriptionTimestamp,
+      String? subscriptionResourceType,
+      String? subscriptionResourceId,
+      String? subscriptionResourceVersionId,
+      String? payload,
+      String? payloadContentType,
+      String? criteria});
+
+  @override
+  $FhirEventDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$FhirEventCopyWithImpl<$Res> implements _$FhirEventCopyWith<$Res> {
+  __$FhirEventCopyWithImpl(this._self, this._then);
+
+  final _FhirEvent _self;
+  final $Res Function(_FhirEvent) _then;
+
+  /// Create a copy of FhirEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? eventType = null,
+    Object? topic = freezed,
+    Object? subject = freezed,
+    Object? data = freezed,
+    Object? dataVersion = freezed,
+    Object? metadataVersion = freezed,
+    Object? eventTime = freezed,
+    Object? subscriptionId = freezed,
+    Object? subscriptionTimestamp = freezed,
+    Object? subscriptionResourceType = freezed,
+    Object? subscriptionResourceId = freezed,
+    Object? subscriptionResourceVersionId = freezed,
+    Object? payload = freezed,
+    Object? payloadContentType = freezed,
+    Object? criteria = freezed,
+  }) {
+    return _then(_FhirEvent(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      eventType: null == eventType
+          ? _self.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as FhirEventType,
+      topic: freezed == topic
+          ? _self.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subject: freezed == subject
+          ? _self.subject
+          : subject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: freezed == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as FhirEventData?,
+      dataVersion: freezed == dataVersion
+          ? _self.dataVersion
+          : dataVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadataVersion: freezed == metadataVersion
+          ? _self.metadataVersion
+          : metadataVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
+      eventTime: freezed == eventTime
+          ? _self.eventTime
+          : eventTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionId: freezed == subscriptionId
+          ? _self.subscriptionId
+          : subscriptionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionTimestamp: freezed == subscriptionTimestamp
+          ? _self.subscriptionTimestamp
+          : subscriptionTimestamp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionResourceType: freezed == subscriptionResourceType
+          ? _self.subscriptionResourceType
+          : subscriptionResourceType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionResourceId: freezed == subscriptionResourceId
+          ? _self.subscriptionResourceId
+          : subscriptionResourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subscriptionResourceVersionId: freezed == subscriptionResourceVersionId
+          ? _self.subscriptionResourceVersionId
+          : subscriptionResourceVersionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      payload: freezed == payload
+          ? _self.payload
+          : payload // ignore: cast_nullable_to_non_nullable
+              as String?,
+      payloadContentType: freezed == payloadContentType
+          ? _self.payloadContentType
+          : payloadContentType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      criteria: freezed == criteria
+          ? _self.criteria
+          : criteria // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of FhirEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FhirEventDataCopyWith<$Res>? get data {
+    if (_self.data == null) {
+      return null;
+    }
+
+    return $FhirEventDataCopyWith<$Res>(_self.data!, (value) {
+      return _then(_self.copyWith(data: value));
+    });
+  }
+}
+
+// dart format on

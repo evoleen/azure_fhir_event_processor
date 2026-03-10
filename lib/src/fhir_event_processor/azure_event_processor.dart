@@ -11,7 +11,7 @@ class AzureEventProcessor implements AbstractFhirEventProcessor {
   }
 
   @override
-  Future<void> processOne({required}) async {
+  Future<void> processOne() async {
     List<FhirMessage> fhirMessages =
         await _messageClient.consumeMessages(messagesCount: 1);
     if (fhirMessages.isEmpty) return;
@@ -68,8 +68,7 @@ class AzureEventProcessor implements AbstractFhirEventProcessor {
         // check if executor listens to this particular entity
         if (executor.resourceTypes.isEmpty ||
             executor.resourceTypes.first == '*' ||
-            executor.resourceTypes
-                .contains(fhirMessage.fhirEvent.data.resourceType)) {
+            executor.resourceTypes.contains(fhirMessage.fhirEvent.resourceType)) {
           // executor matches, run it
           await executor.execute(fhirEvent: fhirMessage.fhirEvent);
         }
