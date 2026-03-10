@@ -52,6 +52,19 @@ void main() {
       expect(event.resourceId, 'Observation/789');
     });
 
+    test('fromSubscriptionJson accepts numeric timestamp (e.g. double)', () {
+      final json = <String, Object?>{
+        'notificationId': 'n1',
+        'subscriptionId': 'Subscription/1',
+        'eventType': 'CREATE',
+        'resourceType': 'Patient',
+        'resourceId': 'Patient/1',
+        'timestamp': 1710000000000.0, // server may send number
+      };
+      final event = FhirEvent.fromSubscriptionJson(json);
+      expect(event.subscriptionTimestamp, '1710000000000.0');
+    });
+
     test('SubscriptionNotificationFhirMessageParser produces FhirMessage', () {
       const body = '''
         {

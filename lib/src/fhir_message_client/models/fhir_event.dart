@@ -38,8 +38,7 @@ abstract class FhirEvent with _$FhirEvent {
       data?.resourceType ?? subscriptionResourceType ?? '';
 
   /// Canonical resource id (from data.resourceFhirId or subscription resourceId).
-  String get resourceId =>
-      data?.resourceFhirId ?? subscriptionResourceId ?? '';
+  String get resourceId => data?.resourceFhirId ?? subscriptionResourceId ?? '';
 
   /// Canonical resource version id as string (from data or subscription).
   String? get resourceVersionId => data != null
@@ -78,8 +77,7 @@ abstract class FhirEvent with _$FhirEvent {
       _$FhirEventFromJson(json);
 
   static bool _isSubscriptionFormat(Map<String, Object?> json) =>
-      json.containsKey('notificationId') &&
-      json.containsKey('subscriptionId');
+      json.containsKey('notificationId') && json.containsKey('subscriptionId');
 
   /// Parses Fire Arrow MESSAGE channel subscription notification format.
   factory FhirEvent.fromSubscriptionJson(Map<String, Object?> json) {
@@ -88,17 +86,24 @@ abstract class FhirEvent with _$FhirEvent {
         ? const FhirEventTypeConverter().fromJson(eventTypeRaw)
         : FhirEventType.resourceCreated;
     return FhirEvent(
-      id: json['notificationId'] as String? ?? '',
+      id: _stringFromJson(json['notificationId']) ?? '',
       eventType: eventType,
-      subscriptionId: json['subscriptionId'] as String?,
-      subscriptionTimestamp: json['timestamp'] as String?,
-      subscriptionResourceType: json['resourceType'] as String?,
-      subscriptionResourceId: json['resourceId'] as String?,
-      subscriptionResourceVersionId:
-          json['resourceVersionId'] as String?,
-      payload: json['payload'] as String?,
-      payloadContentType: json['payloadContentType'] as String?,
-      criteria: json['criteria'] as String?,
+      subscriptionId: _stringFromJson(json['subscriptionId']),
+      subscriptionTimestamp: _stringFromJson(json['timestamp']),
+      subscriptionResourceType: _stringFromJson(json['resourceType']),
+      subscriptionResourceId: _stringFromJson(json['resourceId']),
+      subscriptionResourceVersionId: _stringFromJson(json['resourceVersionId']),
+      payload: _stringFromJson(json['payload']),
+      payloadContentType: _stringFromJson(json['payloadContentType']),
+      criteria: _stringFromJson(json['criteria']),
     );
+  }
+
+  /// Coerces a JSON value to String? (handles String, num, etc.).
+  static String? _stringFromJson(Object? value) {
+    if (value == null) return null;
+    if (value is String) return value;
+    if (value is num) return value.toString();
+    return value.toString();
   }
 }
