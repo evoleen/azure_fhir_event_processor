@@ -38,7 +38,9 @@ class AzureMessageClient implements AbstractFhirMessageClient {
     final message = _serializeToFhirMessage(fhirPoisonedMessage);
     // Azure Put Message wraps the body in XML; raw JSON can contain <, >, &
     // and invalidate the document. Base64 so the payload is XML-safe.
-    final xmlSafeBody = base64.encode(utf8.encode(message));
+    final xmlSafeBody = _messageEncoding == QueueMessageEncoding.base64
+        ? message
+        : base64.encode(utf8.encode(message));
     await _storage.putQMessage(
       qName: _poisonQueueName,
       message: xmlSafeBody,
