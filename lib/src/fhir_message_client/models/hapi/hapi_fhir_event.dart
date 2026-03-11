@@ -33,7 +33,7 @@ abstract class HapiFhirEvent extends FhirEvent with _$HapiFhirEvent {
 
   const factory HapiFhirEvent({
     @JsonKey(name: 'notificationId', defaultValue: '') required String id,
-    @FhirEventTypeConverter() required FhirEventType eventType,
+    @HapiFhirEventTypeConverter() required FhirEventType eventType,
     String? subscriptionId,
     @JsonKey(name: 'timestamp')
     @_StringOrNumConverter()

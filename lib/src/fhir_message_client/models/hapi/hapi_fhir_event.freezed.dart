@@ -17,7 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$HapiFhirEvent {
   @JsonKey(name: 'notificationId', defaultValue: '')
   String get id;
-  @FhirEventTypeConverter()
+  @HapiFhirEventTypeConverter()
   FhirEventType get eventType;
   String? get subscriptionId;
   @JsonKey(name: 'timestamp')
@@ -103,7 +103,7 @@ abstract mixin class $HapiFhirEventCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'notificationId', defaultValue: '') String id,
-      @FhirEventTypeConverter() FhirEventType eventType,
+      @HapiFhirEventTypeConverter() FhirEventType eventType,
       String? subscriptionId,
       @JsonKey(name: 'timestamp')
       @_StringOrNumConverter()
@@ -194,7 +194,7 @@ class _$HapiFhirEventCopyWithImpl<$Res>
 class _HapiFhirEvent extends HapiFhirEvent {
   const _HapiFhirEvent(
       {@JsonKey(name: 'notificationId', defaultValue: '') required this.id,
-      @FhirEventTypeConverter() required this.eventType,
+      @HapiFhirEventTypeConverter() required this.eventType,
       this.subscriptionId,
       @JsonKey(name: 'timestamp')
       @_StringOrNumConverter()
@@ -217,7 +217,7 @@ class _HapiFhirEvent extends HapiFhirEvent {
   @JsonKey(name: 'notificationId', defaultValue: '')
   final String id;
   @override
-  @FhirEventTypeConverter()
+  @HapiFhirEventTypeConverter()
   final FhirEventType eventType;
   @override
   final String? subscriptionId;
@@ -317,7 +317,7 @@ abstract mixin class _$HapiFhirEventCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'notificationId', defaultValue: '') String id,
-      @FhirEventTypeConverter() FhirEventType eventType,
+      @HapiFhirEventTypeConverter() FhirEventType eventType,
       String? subscriptionId,
       @JsonKey(name: 'timestamp')
       @_StringOrNumConverter()

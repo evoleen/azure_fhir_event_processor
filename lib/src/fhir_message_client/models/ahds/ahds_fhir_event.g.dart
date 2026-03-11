@@ -9,8 +9,8 @@ part of 'ahds_fhir_event.dart';
 _AhdsFhirEvent _$AhdsFhirEventFromJson(Map<String, dynamic> json) =>
     _AhdsFhirEvent(
       id: json['id'] as String,
-      eventType:
-          const FhirEventTypeConverter().fromJson(json['eventType'] as String),
+      eventType: const AhdsFhirEventTypeConverter()
+          .fromJson(json['eventType'] as String),
       topic: json['topic'] as String?,
       subject: json['subject'] as String?,
       data: json['data'] == null
@@ -24,7 +24,8 @@ _AhdsFhirEvent _$AhdsFhirEventFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$AhdsFhirEventToJson(_AhdsFhirEvent instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'eventType': const FhirEventTypeConverter().toJson(instance.eventType),
+      'eventType':
+          const AhdsFhirEventTypeConverter().toJson(instance.eventType),
       'topic': instance.topic,
       'subject': instance.subject,
       'data': instance.data?.toJson(),

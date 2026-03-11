@@ -33,6 +33,26 @@ void main() {
       expect(event.criteria, 'Patient?');
     });
 
+    test('HapiFhirEvent.toJson emits HAPI-native eventType (CREATE/UPDATE/DELETE)', () {
+      final createEvent = HapiFhirEvent(
+        id: 'n1',
+        eventType: FhirEventType.resourceCreated,
+        subscriptionId: 'Sub/1',
+        subscriptionResourceType: 'Patient',
+        subscriptionResourceId: 'Patient/1',
+      );
+      final updateEvent = createEvent.copyWith(eventType: FhirEventType.resourceUpdated);
+      final deleteEvent = createEvent.copyWith(eventType: FhirEventType.resourceDeleted);
+      final manualEvent = createEvent.copyWith(eventType: FhirEventType.manuallyTriggered);
+
+      expect(createEvent.toJson()['eventType'], 'CREATE');
+      expect(updateEvent.toJson()['eventType'], 'UPDATE');
+      expect(deleteEvent.toJson()['eventType'], 'DELETE');
+      expect(manualEvent.toJson()['eventType'], 'MANUALLY_TRIGGERED');
+      // Ensure we do not emit AHDS CloudEvents strings
+      expect(createEvent.toJson()['eventType'], isNot(contains('Microsoft.HealthcareApis')));
+    });
+
     test('parseFhirEvent auto-detects subscription format', () {
       const jsonStr = '''
         {

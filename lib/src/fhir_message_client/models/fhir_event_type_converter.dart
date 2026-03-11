@@ -2,11 +2,12 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../fhir_event_type.dart';
 
-/// Converts between [FhirEventType] and JSON strings for both wire formats:
-/// - Azure Healthcare APIs: Microsoft.HealthcareApis.FhirResource*
-/// - Fire Arrow MESSAGE channel: CREATE, UPDATE, DELETE, MANUALLY_TRIGGERED
-class FhirEventTypeConverter implements JsonConverter<FhirEventType, String> {
-  const FhirEventTypeConverter();
+/// Converts [FhirEventType] to/from AHDS (Azure Health Data Services) Event Grid
+/// CloudEvents JSON strings (Microsoft.HealthcareApis.FhirResource*). Use on
+/// [AhdsFhirEvent]. [fromJson] also accepts HAPI MESSAGE channel values
+/// (CREATE, UPDATE, DELETE, MANUALLY_TRIGGERED).
+class AhdsFhirEventTypeConverter implements JsonConverter<FhirEventType, String> {
+  const AhdsFhirEventTypeConverter();
 
   static const _cloudEventsCreated =
       'Microsoft.HealthcareApis.FhirResourceCreated';
@@ -43,6 +44,31 @@ class FhirEventTypeConverter implements JsonConverter<FhirEventType, String> {
         return _cloudEventsUpdated;
       case FhirEventType.resourceDeleted:
         return _cloudEventsDeleted;
+      case FhirEventType.manuallyTriggered:
+        return 'MANUALLY_TRIGGERED';
+    }
+  }
+}
+
+/// Converts [FhirEventType] to/from HAPI MESSAGE channel JSON strings
+/// (CREATE, UPDATE, DELETE, MANUALLY_TRIGGERED). Use on [HapiFhirEvent] so
+/// [toJson] emits HAPI-native values instead of AHDS CloudEvents strings.
+class HapiFhirEventTypeConverter implements JsonConverter<FhirEventType, String> {
+  const HapiFhirEventTypeConverter();
+
+  @override
+  FhirEventType fromJson(String json) =>
+      const AhdsFhirEventTypeConverter().fromJson(json);
+
+  @override
+  String toJson(FhirEventType object) {
+    switch (object) {
+      case FhirEventType.resourceCreated:
+        return 'CREATE';
+      case FhirEventType.resourceUpdated:
+        return 'UPDATE';
+      case FhirEventType.resourceDeleted:
+        return 'DELETE';
       case FhirEventType.manuallyTriggered:
         return 'MANUALLY_TRIGGERED';
     }

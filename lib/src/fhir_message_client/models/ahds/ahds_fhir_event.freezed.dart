@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AhdsFhirEvent {
   String get id;
-  @FhirEventTypeConverter()
+  @AhdsFhirEventTypeConverter()
   FhirEventType get eventType;
   String? get topic;
   String? get subject;
@@ -74,7 +74,7 @@ abstract mixin class $AhdsFhirEventCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @FhirEventTypeConverter() FhirEventType eventType,
+      @AhdsFhirEventTypeConverter() FhirEventType eventType,
       String? topic,
       String? subject,
       AhdsEventData? data,
@@ -163,7 +163,7 @@ class _$AhdsFhirEventCopyWithImpl<$Res>
 class _AhdsFhirEvent extends AhdsFhirEvent {
   const _AhdsFhirEvent(
       {required this.id,
-      @FhirEventTypeConverter() required this.eventType,
+      @AhdsFhirEventTypeConverter() required this.eventType,
       this.topic,
       this.subject,
       this.data,
@@ -177,7 +177,7 @@ class _AhdsFhirEvent extends AhdsFhirEvent {
   @override
   final String id;
   @override
-  @FhirEventTypeConverter()
+  @AhdsFhirEventTypeConverter()
   final FhirEventType eventType;
   @override
   final String? topic;
@@ -247,7 +247,7 @@ abstract mixin class _$AhdsFhirEventCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      @FhirEventTypeConverter() FhirEventType eventType,
+      @AhdsFhirEventTypeConverter() FhirEventType eventType,
       String? topic,
       String? subject,
       AhdsEventData? data,

@@ -16,7 +16,7 @@ abstract class AhdsFhirEvent extends FhirEvent with _$AhdsFhirEvent {
 
   const factory AhdsFhirEvent({
     required String id,
-    @FhirEventTypeConverter() required FhirEventType eventType,
+    @AhdsFhirEventTypeConverter() required FhirEventType eventType,
     String? topic,
     String? subject,
     AhdsEventData? data,

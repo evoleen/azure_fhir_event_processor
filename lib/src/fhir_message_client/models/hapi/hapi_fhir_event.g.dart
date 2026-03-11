@@ -9,8 +9,8 @@ part of 'hapi_fhir_event.dart';
 _HapiFhirEvent _$HapiFhirEventFromJson(Map<String, dynamic> json) =>
     _HapiFhirEvent(
       id: json['notificationId'] as String? ?? '',
-      eventType:
-          const FhirEventTypeConverter().fromJson(json['eventType'] as String),
+      eventType: const HapiFhirEventTypeConverter()
+          .fromJson(json['eventType'] as String),
       subscriptionId: json['subscriptionId'] as String?,
       subscriptionTimestamp:
           const _StringOrNumConverter().fromJson(json['timestamp']),
@@ -27,7 +27,8 @@ _HapiFhirEvent _$HapiFhirEventFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$HapiFhirEventToJson(_HapiFhirEvent instance) =>
     <String, dynamic>{
       'notificationId': instance.id,
-      'eventType': const FhirEventTypeConverter().toJson(instance.eventType),
+      'eventType':
+          const HapiFhirEventTypeConverter().toJson(instance.eventType),
       'subscriptionId': instance.subscriptionId,
       'timestamp':
           const _StringOrNumConverter().toJson(instance.subscriptionTimestamp),
