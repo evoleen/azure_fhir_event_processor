@@ -50,7 +50,7 @@ void main() {
       fhirMessage = list.first;
       expect(fhirMessage.id, "ddd-8438ecb7-06a2-4f04-b8b2-211b6f236003");
       expect(fhirMessage.fhirEvent, isA<FhirEvent>());
-      expect(fhirMessage.fhirEvent.data.resourceFhirId,
+      expect(fhirMessage.fhirEvent.resourceId,
           "60e27fa3-e740-4a56-b20e-b6cd7f3c369b");
     });
 

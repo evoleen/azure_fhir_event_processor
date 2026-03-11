@@ -1,22 +1,40 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:azure_fhir_event_processor/azure_fhir_event_processor.dart';
+import 'package:fhir_r4/fhir_r4.dart';
 
-part 'fhir_event.freezed.dart';
-part 'fhir_event.g.dart';
+import '../fhir_event_type.dart';
+import 'ahds/ahds_fhir_event.dart';
+import 'hapi/hapi_fhir_event.dart';
 
-@freezed
-class FhirEvent with _$FhirEvent {
-  const factory FhirEvent({
-    required String id,
-    required String topic,
-    required String subject,
-    required FhirEventData data,
-    required FhirEventType eventType,
-    required String dataVersion,
-    required String metadataVersion,
-    required String eventTime,
-  }) = _FhirEvent;
+/// Common base for FHIR subscription events from either AHDS (Event Grid)
+/// or HAPI (MESSAGE channel). Use [AhdsFhirEvent] or [HapiFhirEvent] for
+/// format-specific fields.
+abstract class FhirEvent {
+  const FhirEvent();
 
-  factory FhirEvent.fromJson(Map<String, Object?> json) =>
-      _$FhirEventFromJson(json);
+  String get id;
+  FhirEventType get eventType;
+
+  /// Resource type (e.g. "Patient", "CarePlan").
+  String get resourceType;
+
+  /// Resource id (e.g. "Patient/123" or logical id).
+  String get resourceId;
+
+  /// Resource version id as string, if available.
+  String? get resourceVersionId;
+
+  /// Parsed FHIR R4 resource from payload; only non-null for [HapiFhirEvent]
+  /// when the message includes full resource JSON.
+  Resource? get payloadResource => null;
+
+  /// Serializes this event to JSON (AHDS or HAPI shape).
+  Map<String, dynamic> toJson();
+
+  /// Detects AHDS vs HAPI format and returns the matching subclass.
+  static FhirEvent parseFhirEvent(Map<String, Object?> json) {
+    if (json.containsKey('notificationId') &&
+        json.containsKey('subscriptionId')) {
+      return HapiFhirEvent.fromSubscriptionJson(json);
+    }
+    return AhdsFhirEvent.fromJson(json);
+  }
 }
