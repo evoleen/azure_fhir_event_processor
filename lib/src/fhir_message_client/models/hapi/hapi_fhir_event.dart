@@ -76,8 +76,11 @@ abstract class HapiFhirEvent extends FhirEvent with _$HapiFhirEvent {
   Resource? get payloadResource {
     final p = payload;
     if (p == null || p.isEmpty) return null;
-    final ct = payloadContentType?.toLowerCase() ?? '';
-    if (ct != 'application/fhir+json' && ct != 'application/json') {
+    final ct = payloadContentType?.toLowerCase().trim() ?? '';
+    // MIME types may include parameters (e.g. "application/fhir+json; charset=utf-8")
+    final baseContentType = ct.split(';').firstOrNull?.trim();
+    if (baseContentType != 'application/fhir+json' &&
+        baseContentType != 'application/json') {
       return null;
     }
     try {
