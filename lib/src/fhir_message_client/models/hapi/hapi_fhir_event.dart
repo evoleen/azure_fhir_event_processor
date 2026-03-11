@@ -35,10 +35,16 @@ abstract class HapiFhirEvent extends FhirEvent with _$HapiFhirEvent {
     @JsonKey(name: 'notificationId', defaultValue: '') required String id,
     @FhirEventTypeConverter() required FhirEventType eventType,
     String? subscriptionId,
-    @JsonKey(name: 'timestamp') @_StringOrNumConverter() String? subscriptionTimestamp,
+    @JsonKey(name: 'timestamp')
+    @_StringOrNumConverter()
+    String? subscriptionTimestamp,
     @JsonKey(name: 'resourceType') String? subscriptionResourceType,
-    @JsonKey(name: 'resourceId') String? subscriptionResourceId,
-    @JsonKey(name: 'resourceVersionId') String? subscriptionResourceVersionId,
+    @JsonKey(name: 'resourceId')
+    @_StringOrNumConverter()
+    String? subscriptionResourceId,
+    @JsonKey(name: 'resourceVersionId')
+    @_StringOrNumConverter()
+    String? subscriptionResourceVersionId,
     String? payload,
     String? payloadContentType,
     String? criteria,

@@ -15,8 +15,10 @@ _HapiFhirEvent _$HapiFhirEventFromJson(Map<String, dynamic> json) =>
       subscriptionTimestamp:
           const _StringOrNumConverter().fromJson(json['timestamp']),
       subscriptionResourceType: json['resourceType'] as String?,
-      subscriptionResourceId: json['resourceId'] as String?,
-      subscriptionResourceVersionId: json['resourceVersionId'] as String?,
+      subscriptionResourceId:
+          const _StringOrNumConverter().fromJson(json['resourceId']),
+      subscriptionResourceVersionId:
+          const _StringOrNumConverter().fromJson(json['resourceVersionId']),
       payload: json['payload'] as String?,
       payloadContentType: json['payloadContentType'] as String?,
       criteria: json['criteria'] as String?,
@@ -30,8 +32,10 @@ Map<String, dynamic> _$HapiFhirEventToJson(_HapiFhirEvent instance) =>
       'timestamp':
           const _StringOrNumConverter().toJson(instance.subscriptionTimestamp),
       'resourceType': instance.subscriptionResourceType,
-      'resourceId': instance.subscriptionResourceId,
-      'resourceVersionId': instance.subscriptionResourceVersionId,
+      'resourceId':
+          const _StringOrNumConverter().toJson(instance.subscriptionResourceId),
+      'resourceVersionId': const _StringOrNumConverter()
+          .toJson(instance.subscriptionResourceVersionId),
       'payload': instance.payload,
       'payloadContentType': instance.payloadContentType,
       'criteria': instance.criteria,

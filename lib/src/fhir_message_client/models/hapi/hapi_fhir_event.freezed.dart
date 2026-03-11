@@ -26,8 +26,10 @@ mixin _$HapiFhirEvent {
   @JsonKey(name: 'resourceType')
   String? get subscriptionResourceType;
   @JsonKey(name: 'resourceId')
+  @_StringOrNumConverter()
   String? get subscriptionResourceId;
   @JsonKey(name: 'resourceVersionId')
+  @_StringOrNumConverter()
   String? get subscriptionResourceVersionId;
   String? get payload;
   String? get payloadContentType;
@@ -107,8 +109,12 @@ abstract mixin class $HapiFhirEventCopyWith<$Res> {
       @_StringOrNumConverter()
       String? subscriptionTimestamp,
       @JsonKey(name: 'resourceType') String? subscriptionResourceType,
-      @JsonKey(name: 'resourceId') String? subscriptionResourceId,
-      @JsonKey(name: 'resourceVersionId') String? subscriptionResourceVersionId,
+      @JsonKey(name: 'resourceId')
+      @_StringOrNumConverter()
+      String? subscriptionResourceId,
+      @JsonKey(name: 'resourceVersionId')
+      @_StringOrNumConverter()
+      String? subscriptionResourceVersionId,
       String? payload,
       String? payloadContentType,
       String? criteria});
@@ -194,8 +200,12 @@ class _HapiFhirEvent extends HapiFhirEvent {
       @_StringOrNumConverter()
       this.subscriptionTimestamp,
       @JsonKey(name: 'resourceType') this.subscriptionResourceType,
-      @JsonKey(name: 'resourceId') this.subscriptionResourceId,
-      @JsonKey(name: 'resourceVersionId') this.subscriptionResourceVersionId,
+      @JsonKey(name: 'resourceId')
+      @_StringOrNumConverter()
+      this.subscriptionResourceId,
+      @JsonKey(name: 'resourceVersionId')
+      @_StringOrNumConverter()
+      this.subscriptionResourceVersionId,
       this.payload,
       this.payloadContentType,
       this.criteria})
@@ -220,9 +230,11 @@ class _HapiFhirEvent extends HapiFhirEvent {
   final String? subscriptionResourceType;
   @override
   @JsonKey(name: 'resourceId')
+  @_StringOrNumConverter()
   final String? subscriptionResourceId;
   @override
   @JsonKey(name: 'resourceVersionId')
+  @_StringOrNumConverter()
   final String? subscriptionResourceVersionId;
   @override
   final String? payload;
@@ -311,8 +323,12 @@ abstract mixin class _$HapiFhirEventCopyWith<$Res>
       @_StringOrNumConverter()
       String? subscriptionTimestamp,
       @JsonKey(name: 'resourceType') String? subscriptionResourceType,
-      @JsonKey(name: 'resourceId') String? subscriptionResourceId,
-      @JsonKey(name: 'resourceVersionId') String? subscriptionResourceVersionId,
+      @JsonKey(name: 'resourceId')
+      @_StringOrNumConverter()
+      String? subscriptionResourceId,
+      @JsonKey(name: 'resourceVersionId')
+      @_StringOrNumConverter()
+      String? subscriptionResourceVersionId,
       String? payload,
       String? payloadContentType,
       String? criteria});
