@@ -10,7 +10,7 @@ environment:
 # Add regular dependencies here.
 dependencies:
   azstore: ^1.0.3
-  freezed_annotation: ^2.4.4
+  freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
 
 dev_dependencies:
